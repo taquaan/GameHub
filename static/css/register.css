@@ -5,6 +5,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: #121212;
+}
 main {
   position: relative;
 }
@@ -41,8 +44,13 @@ main {
 }
 
 .sign-in-section > .user-input-holder {
+  width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.user-input-holder > .user-input-section {
+  width: 445px;
 }
 
 .user-input-section > .user-input {
@@ -56,14 +64,10 @@ main {
   color: rgba(245, 245, 245, 0.6);
   background-color: #ffffff00;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  padding-left: 16px;
+  padding-left: 18px;
 }
 
-.continue-button-holder {
-  display: flex;
-  justify-content: center;
-}
-.continue-button-holder > .continue-link > .continue {
+.user-input-section > .continue {
   width: 445px;
   height: 67px;
   padding: 12px;

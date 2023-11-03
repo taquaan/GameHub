@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign in</title>
-    <link rel="stylesheet" href="./static/css/signIn.css" />
+    <link rel="stylesheet" href="./static/css/register.css" />
   </head>
   <body>
     <main>
@@ -23,42 +23,41 @@
             />
           </div>
           <h3 class="title">Sign up</h3>
-          <div class="user-input-holder">
+          <form class="user-input-holder">
             <div class="user-input-section">
               <input
                 type="text"
                 class="user-input username"
                 placeholder="Username"
+                required
               />
               <br />
               <input
                 type="text"
                 class="user-input email"
                 placeholder="Email Adress"
+                required
               />
               <br />
               <input
                 type="password"
                 class="user-input password"
                 placeholder="Password"
+                required
               />
+              <button type="submit" class="continue">CONTINUE</button>
             </div>
-          </div>
-          <div class="continue-button-holder">
-            <a href="#" class="continue-link"
-              ><button class="continue">CONTINUE</button></a
-            >
-          </div>
+          </form>
           <hr />
           <div class="side-content">
             <p>or continue with</p>
             <div class="icon-holder">
               <div class="icon-flex-holder">
-                <img src="./static/img/facebook.svg" alt="" />
-                <img src="./static/img/twitter.svg" alt="" />
-                <img src="./static/img/google.svg" alt="" />
-                <img src="./static/img/apple.svg" alt="" />
-                <img src="./static/img/steam.svg" alt="" />
+                <img src="./static/img/facebook.svg" alt="facebook icon" />
+                <img src="./static/img/twitter.svg" alt="twitter icon" />
+                <img src="./static/img/google.svg" alt="google icon" />
+                <img src="./static/img/apple.svg" alt="apple icon" />
+                <img src="./static/img/steam.svg" alt="steam icon" />
               </div>
             </div>
             <div class="privacy-policy">
