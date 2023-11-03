@@ -1,14 +1,4 @@
 @import "styles.css";
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: blue;
-}
 header {
   display: flex;
   align-items: center;
@@ -53,8 +43,11 @@ header > .side-compo-flex-holder > .icon-holder {
   border-radius: 50px;
   cursor: pointer;
 }
-.side-compo-flex-holder > .icon-holder > .header-icon {
+.side-compo-flex-holder > .icon-holder > .icon {
   width: 25px;
+}
+.side-compo-flex-holder > .dropdown {
+  cursor: pointer;
 }
 .avatar-holder {
   position: relative;
