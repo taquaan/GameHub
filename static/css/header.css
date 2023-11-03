@@ -1,0 +1,75 @@
+@import "styles.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: blue;
+}
+header {
+  display: flex;
+  align-items: center;
+  padding: 34px 128px;
+  background-color: #212121;
+}
+header > .main-compo-flex-holder {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: left;
+}
+header > .main-compo-flex-holder > .logo {
+  width: 24%;
+}
+header > .main-compo-flex-holder > .link {
+  text-decoration: none;
+}
+.main-compo-flex-holder > .link > h3 {
+  font-weight: 400;
+  color: #909090;
+  font-family: "Inter";
+  font-size: 28px;
+}
+.main-compo-flex-holder > .link > h3:hover {
+  color: #fff;
+  transition: 0.2s;
+}
+header > .side-compo-flex-holder {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+header > .side-compo-flex-holder > .icon-holder {
+  background-color: #4d4d4d;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.side-compo-flex-holder > .icon-holder > .header-icon {
+  width: 25px;
+}
+.avatar-holder {
+  position: relative;
+}
+.avatar-holder > .user-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50px;
+}
+.avatar-holder > .user-status {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: #70ff00;
+  border-radius: 50px;
+  right: 2px;
+  bottom: 6px;
+}
