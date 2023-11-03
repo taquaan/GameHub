@@ -1,12 +1,13 @@
 from flask import (Flask, render_template, request, redirect, session, url_for)
 import sqlite3
+import time
 
 app = Flask(__name__)
 sqldbuser = 'db/userData.db'
 
 @app.route("/")
 def index():
-  return render_template("register.html")
+  return render_template("register.html", show_noti=False)
 
 #Create the ID for a new user
 def generateID():
@@ -40,9 +41,12 @@ def register():
   
   # Add user to DB
   newid = saveToDB(username, email, password)
-  return render_template("register.html")
+  return render_template("register.html", show_noti=True)
 
 
+@app.route("/main")
+def main():
+  return render_template("main.html")
 
 if __name__ == '__main__':
   app.run(debug=True)

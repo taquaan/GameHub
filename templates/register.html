@@ -14,6 +14,7 @@
         class="background-img"
       />
       <div class="sign-in-flex-container">
+        {% if not show_noti %}
         <div class="sign-in-section">
           <div class="logo-holder">
             <img
@@ -75,6 +76,24 @@
             </div>
           </div>
         </div>
+        {% endif %} {% if show_noti %}
+        <div class="successful-noti">
+          <div class="logo-holder">
+            <img
+              src="./static/img/full-logo-vertical.svg"
+              alt="GameHub logo"
+              class="logo"
+            />
+          </div>
+          <h3 class="noti">Sign Up Successful!</h3>
+        </div>
+
+        <script>
+          setTimeout(function () {
+            window.location.href = "/main";
+          }, 2700); // Redirect to main page after 2.7 second delay
+        </script>
+        {% endif %}
       </div>
     </main>
   </body>
