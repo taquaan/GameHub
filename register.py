@@ -2,7 +2,7 @@ from flask import (Flask, render_template, request, redirect, session, url_for)
 import sqlite3
 
 app = Flask(__name__)
-sqldbuser = './db/userData.db'
+sqldbuser = 'db/userData.db'
 
 @app.route("/")
 def index():
@@ -13,7 +13,7 @@ def generateID():
   max_id = 0
   conn = sqlite3.connect(sqldbuser)
   cursor = conn.cursor()
-  sqlcommand = "Select Max(id) from user"
+  sqlcommand = "Select Max(id) from users"
   cursor.execute(sqlcommand)
   max_id = cursor.fetchone()[0]
   return max_id
@@ -28,7 +28,7 @@ def saveToDB(username, email, password):
   conn = sqlite3.connect(sqldbuser)
   cursor = conn.cursor()
   # Insert information into DB
-  cursor.execute("Insert into user(id, name, email, password) values (?,?,?,?)", (id_max, username, email, password))
+  cursor.execute("Insert into users(id, username, email, password, number_of_games, number_of_badges, number_of_friends) values (?,?,?,?,?,?,?)", (id_max, username, email, password, 0,0,0))
   conn.commit()
   conn.close()
   
@@ -38,18 +38,9 @@ def register():
   email = request.form["email"]
   password = request.form["password"]
   
-  # Server-side validation
-  if not username: username_error = "Username is required"
-  if not password: password_error = "Password is required"
-  if username_error or password_error:
-    return render_template("app_register.html", username_error = username_error, password_error = password_error, registration_success = "")
-  
   # Add user to DB
   newid = saveToDB(username, email, password)
-  strouput = f'Registered: Username - {username}, Password - {password}'
-  registration_success = "Registration Successful! with id = " + str(newid)
-  success = registration_success+ ", " + strouput
-  return render_template("app_register.html", username_error = "", password_error = "", registration_success = success)
+  return render_template("register.html")
 
 
 

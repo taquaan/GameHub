@@ -23,11 +23,16 @@
             />
           </div>
           <h3 class="title">Sign up</h3>
-          <form class="user-input-holder">
-            <div class="user-input-section">
+          <div class="user-input-holder">
+            <form
+              class="user-input-section"
+              method="POST"
+              action="{{ url_for('register')}}"
+            >
               <input
                 type="text"
                 class="user-input username"
+                name="username"
                 placeholder="Username"
                 required
               />
@@ -35,6 +40,7 @@
               <input
                 type="text"
                 class="user-input email"
+                name="email"
                 placeholder="Email Adress"
                 required
               />
@@ -42,12 +48,13 @@
               <input
                 type="password"
                 class="user-input password"
+                name="password"
                 placeholder="Password"
                 required
               />
               <button type="submit" class="continue">CONTINUE</button>
-            </div>
-          </form>
+            </form>
+          </div>
           <hr />
           <div class="side-content">
             <p>or continue with</p>
