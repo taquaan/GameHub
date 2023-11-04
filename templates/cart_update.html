@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Your shopping cart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css')}}"
+    />
+  </head>
+  <body>
+    <h3>
+      {% if user_name %} Welcome, {{ user_name }}
+      <a href="/logout">Logout</a> {% else %} You are not logged in.
+      <a href="/login">Login</a>
+      {% endif %}
+    </h3>
+    <!-- <a href="{{ url_for('view_cart') }}">View Cart</a>
+    <a href="{{ url_for('view_cart') }}"><img class="   icon   " src="" alt=""</a> -->
+    <h1>Your shopping cart</h1>
+    <form method="post" action="{{ url_for('update_cart') }}">
+      <table class="cart">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tags</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Update Quantity</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in carts %}
+          <tr>
+            <td>{{ product['name'] }}</td>
+            <td>{{ product['tags'] }}</td>
+            <td>{{ product['price'] }}</td>
+            <td>{{ product['quantity'] }}</td>
+            <td>
+              <input type="number" name="quantity"-{{ product['name'] }}"
+              min="0" value="{{ product['quantity'] }}"">
+            </td>
+            <td>
+              <form
+                method="post"
+                action="{{ url_for('delete_item', name=product['name']) }}"
+              >
+                <input type="submit" value="Delete" />
+              </form>
+            </td>
+            <td>
+              <input type="button" name="delete-{{ product['name'] }}" />
+              <button type="submit" name="delete-{{ product['name'] }}">
+                Delete
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <input type="submit" value="Update Cart" />
+    </form>
+    <h1>Create Order</h1>
+    <form method="POST" action="{{ url_for('proceed_cart') }}">
+      <input type="submit" value="Proceed Cart" />
+    </form>
+  </body>
+</html>
