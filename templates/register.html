@@ -70,7 +70,11 @@
             </div>
             <div class="privacy-policy">
               <p>
-                By logging in or signing up, <br />
+                By
+                <a href="{{ url_for('login')}}"><span>logging in</span></a> or
+                <a href="{{ url_for('register') }}"><span>signing up</span></a
+                >,
+                <br />
                 you agree with our <u class="policy">Privacy Policy</u>
               </p>
             </div>

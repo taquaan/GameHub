@@ -119,6 +119,16 @@ main {
 .privacy-policy > p > u {
   color: #fff;
 }
+.privacy-policy > p > a {
+  text-decoration: none;
+}
+.privacy-policy > p > a > span {
+  color: #fff;
+  transition: 0.2s;
+}
+.privacy-policy > p > a > span:hover {
+  color: #df571d;
+}
 
 /* Notification */
 .successful-noti {
