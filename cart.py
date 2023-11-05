@@ -2,63 +2,70 @@ from flask import Flask, render_template, request, session, url_for, redirect
 import sqlite3
 app = Flask(__name__)
 app.secret_key = "FelixPham"
-sqldbname = "db/website.db"
+sqldbname = "db/data.sqlite"
 
 @app.route('/')
 def index():
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
-    cursor.execute("Select * from storages")
+    cursor.execute("Select * from mytable")
     data = cursor.fetchall()
     conn.close()
     return render_template(
-        'shoppingcart.html', table=data
+        'Searching.html', table=data
     )
 
 @app.route('/searchData', methods=['POST'])
 def searchData():
     search_text = request.form['searchInput']
-    html_table = load_data_from_db(search_text)
+    html_table,output_message = load_data_from_db(search_text)
     print(html_table)
     return render_template(
-        'shoppingcart.html',
+        'Searching.html',
         search_text=search_text,
-        table=html_table
+        table=html_table,
+        output_message=output_message if search_text else None
     )
 
 def load_data_from_db(search_text):
     if search_text != "":
         conn = sqlite3.connect(sqldbname)
         cursor = conn.cursor()
-        sqlcommand = ("Select * from storages "
-                      "where brand like '%")+search_text+"%'"
-        sqlcommand = sqlcommand + ("or model like '%")+search_text+"%'"
+        sqlcommand = ("Select * from mytable "
+                      "where Name like '%")+search_text+"%'"
+        sqlcommand = sqlcommand + ("or Name like '%")+search_text+"%'"
         cursor.execute(sqlcommand)
         data = cursor.fetchall()
         conn.close()
-        return data
+        if len(data) == 0:
+            output_message = "No Matching Games Found"
+            return data,output_message
+        else:
+            return data,None
+    else: 
+      return None,None
 
-def load_data(search_text):
-    import pandas as pd
-    df = pd.read_csv('gradedata.csv')
-    dfX = df
-    if search_text != "":
-            dfX = df[(df["fname"] == search_text) |
-                     (df["lname"] == search_text)]
-            print (dfX)
-    html_table = dfX.to_html(classes='data',
-                             escape=False)
-    return html_table
+# def load_data(search_text):
+#     import pandas as pd
+#     df = pd.read_csv('gradedata.csv')
+#     dfX = df
+#     if search_text != "":
+#             dfX = df[(df["fname"] == search_text) |
+#                      (df["lname"] == search_text)]
+#             print (dfX)
+#     html_table = dfX.to_html(classes='data',
+#                              escape=False)
+#     return html_table
 
 @app.route("/cart/add", methods=['POST'])
 def add_to_cart():
-    sqldbname = "db/website.db"
+    sqldbname = "db/data.sqlite"
     product_id = request.form["product_id"]
     quantity = int(request.form["quantity"])
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
-    cursor.execute("SELECT model, price, picture, details "
-                   "FROM storages WHERE id = ?",
+    cursor.execute("SELECT Name, Pric, Img_url_1"
+                   "FROM mytable WHERE id = ?",
                    (product_id,))
     product = cursor.fetchone()
     conn.close()
@@ -66,13 +73,13 @@ def add_to_cart():
         "id": product_id,
         "name": product[0],
         "price": product[1],
-        "quantity": quantity
+        # "quantity": quantity
     }
     cart = session.get("cart", [])
     found = False
     for item in cart:
         if item["id"] == product_id:
-            item["quantity"] += quantity
+            # item["quantity"] += quantity
             found = True
             break
     if not found:
@@ -125,9 +132,9 @@ def view_cart():
 #         cursor.execute(query, selected_filters)
 #         result = cursor.fetchall()
 #         conn.close()
-#         return render_template('shoppingcart.html', data=result)
+#         return render_template('Searching.html', data=result)
 #     else:
-#         return render_template('shoppingcart.html')
+#         return render_template('Searching.html')
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)

@@ -53,8 +53,8 @@ body {
 .product-item button {
   background-color: rgb(230, 149, 0);
   width: 100%;
-  height: 0;
-  opacity: 0;
+  height: 60px;
+  visibility:hidden;
   position: relative;
   bottom: -10px;
   border-bottom-left-radius: 20px;
@@ -62,7 +62,7 @@ body {
 }
 .product-item:hover button {
   height: 60px;
-  opacity: 1;
+  visibility: visible;
   transition: 0.5s ease-in-out;
 }
 

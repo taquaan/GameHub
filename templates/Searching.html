@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="static/css/style.css">
+<link rel="stylesheet" type="text/css" href="static/css/Search.css">
 <meta charset="UTF-8">
 
 <head>
@@ -43,8 +43,9 @@
                     <!-- <td>{{ product[0] }}</td> -->
                     <!-- <td>{{ product[1] }}</td>
                 <td>{{ product[2] }}</td> -->
-                    <img src="{{product[5]}}" alt="{{product[5]}}">
-                    <h2>{{ product[4] }}</h2>
+                    <img src="{{product[11]}}" alt="{{product[11]}}">
+                    <h2>{{ product[0] }}</h2>
+                    <h3>{{product[7]}}</h3>
                     <!-- <td>{{ product[6] }}</td> -->
 
                     <form action="/cart/add" method="POST">
@@ -54,6 +55,9 @@
                 </div>
                 {% endfor %}
         </table>
+        {% if search_text and output_message %}
+        <p>{{ output_message }}</p>
+    {% endif %}
         {% endif %}
         </p>
     </div>
