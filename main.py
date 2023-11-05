@@ -9,6 +9,7 @@ app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 def index():
   return render_template("product-page.html")
 
+# LOGIN PAGE FUNCTION
 @app.route("/login", methods=["GET","POST"])
 def login():
   session['logged_in'] = False
@@ -73,6 +74,7 @@ def register():
     password = request.form["password"] 
     # Add user to DB
     newid = saveToDB(username, email, password)
+    # Show successfully register notification
     return render_template("register.html", success=True)
   return render_template("register.html", success=False)
 
