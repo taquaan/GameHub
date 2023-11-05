@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in</title>
+    <link rel="stylesheet" href="./static/css/main.css" />
+    <link rel="stylesheet" href="./static/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./static/scripts/splide-4.1.3/dist/css/themes/splide-white.min.css">
+    <script type="text/javascript" src="./static/scripts/splide-4.1.3/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/css/splide-extension-video.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/js/splide-extension-video.min.js"></script>
+  </head>
+  <body>
+    {% include '_header.html' %}
+    <main class="screen">
+      <p class="directory">
+        <span class="directory-text">All Games</span>
+        <span class="directory-text-2">></span>
+        <span class="directory-text">Adventure Games</span>
+        <span class="directory-text-2">></span>
+        <span class="directory-text">Cognosphere LTD.</span>
+        <span class="directory-text-2">></span>
+        <span class="directory-text">Ghenshin Impact</span>
+      </p>
+      <div class="content">
+        <!--Left column-->
+        <div class="left-col">
+          <section id="main-slider" class="splide" aria-label="Screenshots">
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide" data-splide-youtube="https://www.youtube.com/watch?v=i7wgl1v1_5M"><img src="./static/img/genshin_impact/thumbnail.jpeg" alt=""/></li>
+                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-1.jpeg" alt=""/></li>
+                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-2.jpeg" alt=""/></li>
+                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-3.jpeg" alt=""/></li>
+                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-4.jpeg" alt=""/></li>
+              </ul>
+            </div>
+          </section>
+          <ul id="thumbnails" class="thumbnails">
+            <li class="thumbnail" data-splide-youtube="https://www.youtube.com/watch?v=i7wgl1v1_5M"><img src="./static/img/genshin_impact/thumbnail.jpeg" alt=""/></li>
+            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-1.jpeg" alt="" /></li>
+            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-2.jpeg" alt="" /></li>
+            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-3.jpeg" alt="" /></li>
+            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-4.jpeg" alt="" /></li>
+          </ul>
+          <script>
+            var splide = new Splide("#main-slider", {
+              perPage: 1,
+              width: '100%',
+              heightRatio: 0.5625,
+              pagination: false,
+              cover: true,
+              type: 'fade',
+            }).mount( window.splide.Extensions );
+
+            var thumbnails = document.getElementsByClassName("thumbnail");
+            var current;
+      
+            for (var i = 0; i < thumbnails.length; i++) {
+              initThumbnail(thumbnails[i], i);
+            }
+      
+            function initThumbnail(thumbnail, index) {
+              thumbnail.addEventListener("click", function () {
+                splide.go(index);
+              });
+            }
+      
+            splide.on("mounted move", function () {
+              var thumbnail = thumbnails[splide.index];
+      
+              if (thumbnail) {
+                if (current) {
+                  current.classList.remove("is-active");
+                }
+      
+                thumbnail.classList.add("is-active");
+                current = thumbnail;
+              }
+            });
+
+            splide.mount();
+          </script>
+          <section id="game-description" class="description">
+            <h1>Step into Teyvat, a vast world teeming with life and flowing with elemental energy.</h1>
+            <p><b>MASSIVE OPEN WORLD</b></p>
+            <p>Climb any mountain, swim across any river, and glide over the world below, taking in the jaw-dropping scenery each step of the way. And if you stop to investigate a wandering Seelie or strange mechanism, who knows what you might discover?</p>
+            <p><b>ELEMENTAL COMBAT SYSTEM</b></p>
+            <p>Harness the seven elements to unleash elemental reactions. Anemo, Electro, Hydro, Pyro, Cryo, Dendro, and Geo interact in all sorts of ways, and Vision wielders have the power to turn this to their advantage. Will you vaporize Hydro with Pyro, electro-charge it with Electro, or freeze it with Cryo? Your mastery of the elements will give you the upper hand in battle and exploration.</p>
+            <p><b>BEAUTIFUL VISUALS</b></p>
+            <p>Feast your eyes on the world around you, with a stunning art style, real-time rendering, and finely tuned character animations delivering you a truly immersive visual experience. Lighting and weather all change naturally over time, bringing every detail of this world to life.</p>
+            <p><b>SOOTHING SOUNDTRACK</b></p>
+            <p>Let the beautiful sounds of Teyvat draw you in as you explore the expansive world around you. Performed by the world's top orchestras such as London Philharmonic Orchestra and Shanghai Symphony Orchestra, the soundtrack changes seamlessly with the time and gameplay to match the mood.</p>
+            <p><b>BUILD YOUR DREAM TEAM</b></p>
+            <p>Team up with a diverse cast of characters in Teyvat, each with their own unique personalities, stories, and abilities. Discover your favorite party combinations and level up your characters to help you conquer even the most daunting of enemies and domains.</p>
+            <p><b>JOURNEY WITH FRIENDS</b></p>
+            <p>Team up with friends across various platforms to trigger more elemental action, tackle tricky boss fights, and conquer challenging domains together to reap rich rewards.</p>
+            <p>As you stand atop the peaks of Jueyun Karst and take in the rolling clouds and vast terrain stretching out before you, you may wish to stay in Teyvat a little longer... But until you are reunited with your lost sibling, how can you rest? Go forth, Traveler, and begin your adventure!</p>
+            <p><b>SUPPORT</b></p>
+            <p>If you encounter any issues during the game, you can send us feedback via the in-game Customer Service Center.</p>
+            <p>Customer Service Email: genshin_cs@hoyoverse.com</p>
+          </section>
+          <div class="divider"></div>
+          <section id="update-logs" class="description">
+            <div class="section-title">What’s New?</div>
+            <p><b>Version 4.1 "To the Stars Shining in the Depths" is now available!</b></p>
+            <li>New Areas: Liffey Region and Fontaine Research Institute of Kinetic Energy Engineering Region</li>
+            <li>New Characters: Neuvillette and Wriothesley</li>
+            <li>New Stories: New Archon Quests and Story Quests</li>
+            <li>New Bosses: Millennial Pearl Seahorse and Experimental Field Generator</li>
+            <li>New Weapons: Tome of the Eternal Flow, Cashflow Supervision, and Ballad of the Boundless Blue</li>
+            <li>Genius Invokation TCG Update: New Character Cards and Action Cards</li>
+          </section>
+          <section id="specifications" class="description">
+            <div class="section-title">Specifications</div>
+            <div class="systab">
+              <button class="tablinks" onclick="osTab(event, 'Windows')" id="defaultOpen">Windows</button>
+              <button class="tablinks" onclick="osTab(event, 'macOS')">macOS</button>
+              <button class="tablinks" onclick="osTab(event, 'Linux')">Linux</button>
+            </div>
+            <div id="Windows" class="specs">
+              <div class="sysreq">
+                <div class="syscolumn">
+                  <div class="title">Minimum</div>
+                  <div class="title">OS<p>Windows 7 SP1 64-bit or newer</p></div>
+                  <div class="title">Processor<p>Intel Core i5 or equivalent</p></div>
+                  <div class="title">Memory<p>16 GB</p></div>
+                  <div class="title">Storage<p>30 GB</p></div>
+                  <div class="title">DirectX<p>11</p></div>
+                  <div class="title">Graphics<p>NVIDIA® GeForce® GT 1030 or better</p></div>
+                  <div class="title">Additional Notes<p>60 FPS @ 1280x720, Preset "Low", 2GB VRAM required</p></div>
+                </div>
+                <div class="syscolumn">
+                  <div class="title">Recommended</div>
+                  <div class="title">OS<p>Windows 7 SP1 64-bit or newer</p></div>
+                  <div class="title">Processor<p>Intel Core i7 or equivalent</p></div>
+                  <div class="title">Memory<p>16 GB</p></div>
+                  <div class="title">Storage<p>30 GB</p></div>
+                  <div class="title">DirectX<p>11</p></div>
+                  <div class="title">Graphics<p>NVIDIA® GeForce® GT 1080 or better</p></div>
+                  <div class="title">Additional Notes<p>60 FPS @ 1920x1080, Preset "Highest", Systen RAM 16GB required when running on Intel GPU</p></div>
+                </div>
+              </div>
+              <div class="title">Language Supported
+                <p>Audio: Chinese - Simplified, English, Korean, Japanese.</p>
+                <p>Text: Chinese - Simplified, Chinese - Traditional, English, French, German, Italian, Japanese, Korean, Portuguese, Portuguese - Brazil, Russian, Spanish - Spain, Spanish - Latin America, Thai, Turkish, Vietnamese</p>
+              </div>
+              <div class="divider"></div>
+              <div class="title copyright">Copyright © COGNOSPHERE. All Rights Reserved.<p>Privacy Policy</p></div>
+            </div>
+            <div id="macOS" class="specs">
+              <div class="sysreq">
+                <div class="syscolumn">
+                  <div class="title">Minimum</div>
+                  <div class="title">OS<p>macOS 10.14.5 Mojave or newer</p></div>
+                  <div class="title">Processor<p>Intel Core i7-3770 / AMD FX-9590 / Apple M1</p></div>
+                  <div class="title">Memory<p>16 GB</p></div>
+                  <div class="title">Storage<p>30 GB</p></div>
+                  <div class="title">DirectX<p>11</p></div>
+                  <div class="title">Graphics<p>NVIDIA® GeForce® GTX 670 2GB / AMD™ R9 280</p></div>
+                  <div class="title">Additional Notes<p>60 FPS @ 1280x720, Preset "Low", 2GB VRAM required. Metal is required.</p></div>
+                </div>
+                <div class="syscolumn">
+                  <div class="title">Recommended</div>
+                  <div class="title">OS<p>macOS 10.14.5 Mojave or newer</p></div>
+                  <div class="title">Processor<p>Intel Core i7-4790K / AMD Ryzen 5 1600 / Apple M1</p></div>
+                  <div class="title">Memory<p>16 GB</p></div>
+                  <div class="title">Storage<p>30 GB</p></div>
+                  <div class="title">DirectX<p>11</p></div>
+                  <div class="title">Graphics<p>NVIDIA® GeForce® GTX 980 / AMD™ R9 Fury</p></div>
+                  <div class="title">Additional Notes<p>60 FPS @ 1920x1080, Preset "Highest", Systen RAM 16GB required when running on Intel GPU</p></div>
+                </div>
+              </div>
+              <div class="title">Language Supported
+                <p>Audio: Chinese - Simplified, English, Korean, Japanese.</p>
+                <p>Text: Chinese - Simplified, Chinese - Traditional, English, French, German, Italian, Japanese, Korean, Portuguese, Portuguese - Brazil, Russian, Spanish - Spain, Spanish - Latin America, Thai, Turkish, Vietnamese</p>
+              </div>
+              <div class="divider"></div>
+              <div class="title copyright">Copyright © COGNOSPHERE. All Rights Reserved.<p>Privacy Policy</p></div>
+            </div>
+            <div id="Linux" class="specs">
+              <div class="sysreq">
+                <div class="syscolumn">
+                  <div class="title">Minimum</div>
+                  <div class="title">OS<p>Ubuntu 12.04 or newer</p></div>
+                  <div class="title">Processor<p>Intel Core i5 or equivalent</p></div>
+                  <div class="title">Memory<p>16 GB</p></div>
+                  <div class="title">Storage<p>30 GB</p></div>
+                  <div class="title">DirectX<p>11</p></div>
+                  <div class="title">Graphics<p>NVIDIA® GeForce® GT 1030 or better</p></div>
+                  <div class="title">Additional Notes<p>60 FPS @ 1280x720, Preset "Low", 2GB VRAM required</p></div>
+                </div>
+              </div>
+              <div class="title">Language Supported
+                <p>Audio: Chinese - Simplified, English, Korean, Japanese.</p>
+                <p>Text: Chinese - Simplified, Chinese - Traditional, English, French, German, Italian, Japanese, Korean, Portuguese, Portuguese - Brazil, Russian, Spanish - Spain, Spanish - Latin America, Thai, Turkish, Vietnamese</p>
+              </div>
+              <div class="divider"></div>
+              <div class="title copyright">Copyright © COGNOSPHERE. All Rights Reserved.<p>Privacy Policy</p></div>
+            </div>
+            <script>
+            function osTab(evt, osName) {
+              var i, specs, tablinks;
+              specs = document.getElementsByClassName("specs");
+              for (i = 0; i < specs.length; i++) {
+                specs[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(osName).style.display = "block";
+              evt.currentTarget.className += " active";
+            }
+            
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+            </script>
+          </section>
+          <section id="recommendations" class="description">
+            <div class="section-title">More like this</div>
+            <div class="recommendation">
+              <div class="thumbnail"><img src="https://source.unsplash.com/random/1000x1000?sig=1" alt="" /></div>
+              <div class="thumbnail"><img src="https://source.unsplash.com/random/1000x1000?sig=2" alt="" /></div>
+              <div class="thumbnail"><img src="https://source.unsplash.com/random/1000x1000?sig=3" alt="" /></div>
+              <div class="thumbnail"><img src="https://source.unsplash.com/random/1000x1000?sig=4" alt="" /></div>
+              <div class="thumbnail"><img src="https://source.unsplash.com/random/1000x1000?sig=5" alt="" /></div>
+            </div>
+          </section>
+          <!--This is game review section-->
+          <section class="description">
+            <div class="section-title">Reviews</div>
+            <div class="review">
+              <div class="overall-rating">
+                <div class="rating_stars">
+                  <div class="rating">4.7</div>
+                    <div class="stars">
+                      <i class="fa-solid fa-star-sharp"></i>
+                      <i class="fa-solid fa-star-sharp"></i>
+                      <i class="fa-solid fa-star-sharp"></i>
+                      <i class="fa-solid fa-star-sharp"></i>
+                      <i class="fa-regular fa-star-sharp-half-stroke"></i>
+                    </div>
+                </div>
+                <div class="overall-review">
+                  <div class="title">OVERALL REVIEW</div>
+                  <div class="status">
+                    <div class="div">Overwhelmingly Positive</div>
+                    <div class="count">(696,969 reviews)</div>
+                  </div>
+                </div>
+              </div>
+              <div class="critics-review">
+                <div class="title">CRITICS REVIEWS</div>
+                <div class="reviews">
+                  <div class="container">
+                    <div class="review-info">
+                      <div class="source">Game Informer</div>
+                      <div class="author">by Daniel Tack</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="score">
+                      9.3 / 10
+                      <p>
+                        “This is an amazing smorgasbord of exploration, discovery, combat, and customization worthy of your
+                        attention – despite the presence of a predatory monetization model”
+                      </p>
+                    </div>
+                    <div class="full-review">
+                      <div class="read-full-review">READ FULL REVIEW</div><i class="fa-regular fa-arrow-up-right-from-square"></i>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="review-info">
+                      <div class="source">Game Informer</div>
+                      <div class="author">by Daniel Tack</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="score">
+                      9.3 / 10
+                      <p>
+                        “This is an amazing smorgasbord of exploration, discovery, combat, and customization worthy of your
+                        attention – despite the presence of a predatory monetization model”
+                      </p>
+                    </div>
+                    <div class="full-review">
+                      <div class="read-full-review">READ FULL REVIEW</div><i class="fa-regular fa-arrow-up-right-from-square"></i>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="review-info">
+                      <div class="source">Game Informer</div>
+                      <div class="author">by Daniel Tack</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="score">
+                      9.3 / 10
+                      <p>
+                        “This is an amazing smorgasbord of exploration, discovery, combat, and customization worthy of your
+                        attention – despite the presence of a predatory monetization model”
+                      </p>
+                    </div>
+                    <div class="full-review">
+                      <div class="read-full-review">READ FULL REVIEW</div><i class="fa-regular fa-arrow-up-right-from-square"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="title">Reviews provided by OpenCritic</div>
+              </div>
+          </section>
+        </div>
+        
+        <!--Right column-->
+        <div class="right-col">
+          <div class="game-cover"><img src="./static/img/genshin_impact/cover-art.jpeg" alt="" /></div>
+          <div class="game-info">
+            <div class="game-name">Genshin Impact</div>
+            <div class="rating">
+              <i class="fa fa-star-sharp"></i>
+              <i class="fa fa-star-sharp"></i>
+              <i class="fa fa-star-sharp"></i>
+              <i class="fa fa-star-sharp"></i>
+              <i class="fa-regular fa-star-sharp-half-stroke"></i>
+              <div class="overall-rating">Overwhelmingly Positive</div>
+            </div>
+            <div class="price">
+              <div class="discount-per">-50%</div>
+              <div class="specific">
+                <div class="old-price">$59.99</div>
+                <div class="new-price">$29.99</div>
+                <div class="footnote">Includes in-app purchases</div>
+              </div>
+            </div>
+          </div>
+          <div id="actions" class="game-info">
+            <div class="buttons-container">
+              <button class="action">BUY</button>
+              <button>FREE DEMO</button>
+              <button>ADD TO CART</button>
+              <button><i class="fa-light fa-circle-plus" style="margin: 10px;"></i>ADD TO WISHLIST</button>
+            </div>
+          </div>
+          <div id="dlc" class="game-info">
+            <div class="dlc">
+              <p>Downloadable Contents</p>
+              <div class="dlc-container">
+                <div class="dlc-name">Genshin Impact DLC</div>
+                <div class="dlc-price">$59.99</div>
+                <button>ADD TO CART</button>
+              </div>
+            </div>
+          </div>
+          <div id="publisher" class="game-info">
+            <div class="publisher">
+              <div class="publisher-info">Developer<p>COGNOSPHERE PTE. LTD.</p></div>
+              <div class="publisher-info">Publisher<p>COGNOSPHERE PTE. LTD.</p></div>
+              <div class="publisher-info">Release Date<p>06/08/2021</p></div>
+              <div class="publisher-info">Platform<h6>
+                <i class="fa-brands fa-microsoft"></i>
+                <i class="fa-brands fa-apple"></i>
+                <i class="fa-brands fa-linux"></i>
+              </h6></div>
+            </div>
+          </div>
+          <div id="tags" class="game-info">
+            <div class="tags">
+              <p>Fantasy</p> <p>RPG</p> <p>Open World</p>
+            </div>
+          </div>
+          <div id="esrb" class="game-info">
+            <div class="esrb">
+              <div class="esrb-icon"><img src="./static/img/esrb/E.svg" alt="" /></div>
+              <div class="esrb-content">
+                <b>Everyone</b>
+                <p>Alcohol Reference, Fantasy Violence</p>
+                <div class="divider"></div>
+                <p>Users Interact, In-Game Purchases (Includes Random Items)</p>
+              </div>
+            </div>
+          </div>
+          <div id="features" class="game-info">
+            <div class="features">
+              <p>Features</p>
+              <div class="feature-tabs">
+                <div class="tab"><i class="fa-solid fa-user"></i>Singleplayer</div>
+                <div class="tab"><i class="fa-solid fa-users"></i>Online Multiplayer</div>
+                <div class="tab"><i class="fa-solid fa-user-group-simple"></i>Online Co-Op</div>
+                <div class="tab"><i class="fa-solid fa-gamepad-modern"></i>Controller Support</div>
+                <div class="tab"><i class="fa-solid fa-cloud"></i>Online Saves</div>
+                <div class="tab"><i class="fa-solid fa-floppy-disk"></i>Offline Saves</div>
+                <div class="tab"><i class="fa-solid fa-trophy"></i>Achievements</div>
+                <div class="notice">Requires 3rd Party Login: HoYoverse Account</div>
+              </div>
+            </div>
+          </div>
+          <div id="actions" class="game-info">
+            <div class="actions">
+              <button><i class="fa-solid fa-flag"></i>REPORT</button>
+              <button><i class="fa-solid fa-share-nodes"></i></i>SHARE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include '_footer.html' %}
+  </body>
+</html>

@@ -14,7 +14,6 @@
         class="background-img"
       />
       <div class="sign-in-flex-container">
-        {% if not show_noti %}
         <div class="sign-in-section">
           <div class="logo-holder">
             <img
@@ -61,11 +60,11 @@
             <p>or continue with</p>
             <div class="icon-holder">
               <div class="icon-flex-holder">
-                <img src="./static/img/facebook.svg" alt="facebook icon" />
-                <img src="./static/img/twitter.svg" alt="twitter icon" />
-                <img src="./static/img/google.svg" alt="google icon" />
-                <img src="./static/img/apple.svg" alt="apple icon" />
-                <img src="./static/img/steam.svg" alt="steam icon" />
+                <img src="../static/img/facebook.svg" alt="facebook icon" />
+                <img src="../static/img/twitter.svg" alt="twitter icon" />
+                <img src="../static/img/google.svg" alt="google icon" />
+                <img src="../static/img/apple.svg" alt="apple icon" />
+                <img src="../static/img/steam.svg" alt="steam icon" />
               </div>
             </div>
             <div class="privacy-policy">
@@ -76,24 +75,6 @@
             </div>
           </div>
         </div>
-        {% endif %} {% if show_noti %}
-        <div class="successful-noti">
-          <div class="logo-holder">
-            <img
-              src="./static/img/full-logo-vertical.svg"
-              alt="GameHub logo"
-              class="logo"
-            />
-          </div>
-          <h3 class="noti">Sign Up Successful!</h3>
-        </div>
-
-        <script>
-          setTimeout(function () {
-            window.location.href = "/main";
-          }, 2700); // Redirect to main page after 2.7 second delay
-        </script>
-        {% endif %}
       </div>
     </main>
   </body>
