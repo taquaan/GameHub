@@ -73,7 +73,8 @@ def register():
     password = request.form["password"] 
     # Add user to DB
     newid = saveToDB(username, email, password)
-  return render_template("register.html")
+    return render_template("register.html", success=True)
+  return render_template("register.html", success=False)
 
 if __name__ == '__main__':
   app.run(debug=True)

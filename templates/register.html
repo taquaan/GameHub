@@ -14,7 +14,7 @@
         class="background-img"
       />
       <div class="sign-in-flex-container">
-        {% if not show_noti %}
+        {% if not success %}
         <div class="sign-in-section">
           <div class="logo-holder">
             <img
@@ -28,7 +28,7 @@
             <form
               class="user-input-section"
               method="POST"
-              action="{{ url_for('register')}}"
+              action="http://127.0.0.1:5000/register"
             >
               <input
                 type="text"
@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        {% endif %} {% if show_noti %}
+        {% endif %} {% if success %}
         <div class="successful-noti">
           <div class="logo-holder">
             <img
@@ -90,7 +90,7 @@
 
         <script>
           setTimeout(function () {
-            window.location.href = "/main";
+            window.location.href = "/";
           }, 2700); // Redirect to main page after 2.7 second delay
         </script>
         {% endif %}
