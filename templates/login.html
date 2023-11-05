@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in</title>
+    <link rel="stylesheet" href="./static/css/register.css" />
+  </head>
+  <body>
+    <main>
+      <img
+        src="./static/img/Background.png"
+        alt="Mountain background image"
+        class="background-img"
+      />
+      <div class="sign-in-flex-container">
+        <div class="sign-in-section">
+          <div class="logo-holder">
+            <a href="{{ url_for('index') }}">
+              <img
+                src="./static/img/full-logo-vertical.svg"
+                alt="GameHub logo"
+                class="logo"
+                href=""
+              />
+            </a>
+          </div>
+          <h3 class="title">Login</h3>
+          <div class="user-input-holder">
+            <form
+              class="user-input-section"
+              method="POST"
+              action="{{ url_for('login')}}"
+            >
+              <input
+                type="text"
+                class="user-input username"
+                name="username"
+                placeholder="Username or Email"
+                required
+              />
+              <br />
+              <input
+                type="password"
+                class="user-input password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+              <button type="submit" class="continue">CONTINUE</button>
+            </form>
+          </div>
+          <hr />
+          <div class="side-content">
+            <p>or log in with</p>
+            <div class="icon-holder">
+              <div class="icon-flex-holder">
+                <img src="./static/img/facebook.svg" alt="facebook icon" />
+                <img src="./static/img/twitter.svg" alt="twitter icon" />
+                <img src="./static/img/google.svg" alt="google icon" />
+                <img src="./static/img/apple.svg" alt="apple icon" />
+                <img src="./static/img/steam.svg" alt="steam icon" />
+              </div>
+            </div>
+            <div class="privacy-policy">
+              <p>
+                By logging in or
+                <a href="{{ url_for('register') }}"><span>signing up</span></a
+                >, <br />
+                you agree with our <u class="policy">Privacy Policy</u>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

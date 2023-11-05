@@ -44,9 +44,9 @@ def register():
   return render_template("register.html", show_noti=True)
 
 
-@app.route("/main")
-def main():
-  return render_template("main.html")
+# @app.route("/main")
+# def main():
+#   return render_template("product-page.html")
 
 if __name__ == '__main__':
   app.run(debug=True)
