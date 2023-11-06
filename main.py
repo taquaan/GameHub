@@ -9,6 +9,8 @@ app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 def index():
   return render_template("product-page.html")
 
+
+
 # LOGIN PAGE FUNCTION
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -39,6 +41,8 @@ def check_exists(username, password):
 def logout():
     session['logged_in'] = False
     return render_template('login.html') 
+
+
 
 # REGISTER FUNCTION
 #Create the ID for a new user
@@ -79,6 +83,15 @@ def register():
     # Show successfully register notification
     return render_template("register.html", success=True)
   return render_template("register.html", success=False)
+
+
+
+# FUNCTION FOR ADMIN PAGE
+@app.route("/admin")
+def admin():
+  return render_template("admin.html")
+
+
 
 if __name__ == '__main__':
   app.run(debug=True)
