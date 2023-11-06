@@ -12,7 +12,6 @@ def index():
 # LOGIN PAGE FUNCTION
 @app.route("/login", methods=["GET","POST"])
 def login():
-  session['logged_in'] = False
   if request.method == 'POST':
     username = request.form["username"]
     password = request.form["password"]
@@ -68,12 +67,15 @@ def saveToDB(username, email, password):
   
 @app.route("/register", methods=["GET","POST"])
 def register():
+  session['logged_in'] == False
   if request.method == "POST":
     username = request.form["username"]
     email = request.form["email"]
     password = request.form["password"] 
     # Add user to DB
     newid = saveToDB(username, email, password)
+    # Set the header to logged_in
+    session['logged_in'] = True
     # Show successfully register notification
     return render_template("register.html", success=True)
   return render_template("register.html", success=False)
