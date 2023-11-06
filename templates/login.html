@@ -14,35 +14,29 @@
         class="background-img"
       />
       <div class="sign-in-flex-container">
-        {% if not success %}
         <div class="sign-in-section">
           <div class="logo-holder">
-            <img
-              src="./static/img/full-logo-vertical.svg"
-              alt="GameHub logo"
-              class="logo"
-            />
+            <a href="{{ url_for('index') }}">
+              <img
+                src="./static/img/full-logo-vertical.svg"
+                alt="GameHub logo"
+                class="logo"
+                href=""
+              />
+            </a>
           </div>
-          <h3 class="title">Sign up</h3>
+          <h3 class="title">Login</h3>
           <div class="user-input-holder">
             <form
               class="user-input-section"
               method="POST"
-              action="http://127.0.0.1:5000/register"
+              action="{{ url_for('login')}}"
             >
               <input
                 type="text"
                 class="user-input username"
                 name="username"
-                placeholder="Username"
-                required
-              />
-              <br />
-              <input
-                type="text"
-                class="user-input email"
-                name="email"
-                placeholder="Email Adress"
+                placeholder="Username or Email"
                 required
               />
               <br />
@@ -58,7 +52,7 @@
           </div>
           <hr />
           <div class="side-content">
-            <p>or continue with</p>
+            <p>or log in with</p>
             <div class="icon-holder">
               <div class="icon-flex-holder">
                 <img src="./static/img/facebook.svg" alt="facebook icon" />
@@ -73,31 +67,12 @@
                 By
                 <a href="{{ url_for('login')}}"><span>logging in</span></a> or
                 <a href="{{ url_for('register') }}"><span>signing up</span></a
-                >,
-                <br />
+                >, <br />
                 you agree with our <u class="policy">Privacy Policy</u>
               </p>
             </div>
           </div>
         </div>
-        {% endif %} {% if success %}
-        <div class="successful-noti">
-          <div class="logo-holder">
-            <img
-              src="./static/img/full-logo-vertical.svg"
-              alt="GameHub logo"
-              class="logo"
-            />
-          </div>
-          <h3 class="noti">Sign Up Successful!</h3>
-        </div>
-
-        <script>
-          setTimeout(function () {
-            window.location.href = "/";
-          }, 2700); // Redirect to main page after 2.7 second delay
-        </script>
-        {% endif %}
       </div>
     </main>
   </body>

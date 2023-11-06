@@ -1,32 +1,36 @@
 <header class="header">
-  <div class="main-compo-flex-holder">
-    <img src="./static/img/full-logo.svg" alt="game Hub logo" class="logo" />
-    <a href="#" class="link"><h3>Store</h3></a>
-    <a href="#" class="link"><h3>Community</h3></a>
-    <a href="#" class="link"><h3>Support</h3></a>
-  </div>
-  <div class="side-compo-flex-holder">
-    <div class="icon-holder">
-      <img src="./static/img/icon-search.svg" alt="search icon" class="icon" />
+    <div class="nav">
+      <div class="logo"><img class="full-logo" src="./static/img/full-logo.svg" /></div>
+      <div class="nav-text">
+        <div class="text-wrapper">Store</div>
+        <div class="text-wrapper">Community</div>
+        <div class="text-wrapper">Support</div>
+      </div>
     </div>
-    <div class="icon-holder">
-      <img src="./static/img/icon-cart.svg" alt="cart icon" class="icon" />
+    <div class="user">
+      <div class="nav-button">
+          <label class="button searchbutton"><span class="fa-solid fa-search"></span></label>
+          {% if session['logged_in'] %}
+          <label class="button notibutton"><span class="fa-solid fa-bell"></span></label>
+          <label class="button cartbutton"><span class="fa-solid fa-shopping-basket"></span></label>
+          <div class="avatar-holder">
+            <img
+              src="./static/img/default-avatar.jpg"
+              alt="User Avatar"
+              class="user-avatar"
+            />
+            <div class="user-status"></div>
+          </div>
+          <div class="fa-solid fa-chevron-down dropdown">
+            <div class="dropdown-content">
+              <a href="#">My Dashboard</a>
+              <a href="#">Settings</a>
+              <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+          </div>
+          {% else %}
+          <a class="button loginbutton" href="{{ url_for('login') }}">Login</span></a>
+          {% endif %}
+      </div>
     </div>
-    <div class="icon-holder">
-      <img
-        src="./static/img/icon-bell.svg"
-        alt="notification icon"
-        class="icon"
-      />
-    </div>
-    <div class="avatar-holder">
-      <img
-        src="./static/img/default-avatar.jpg"
-        alt="User Avatar"
-        class="user-avatar"
-      />
-      <div class="user-status"></div>
-    </div>
-    <img src="./static/img/dropdown.svg" alt="dropdown icon" class="dropdown" />
-  </div>
 </header>
