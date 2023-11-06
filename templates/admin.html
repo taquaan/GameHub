@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Panel</title>
     <link rel="stylesheet" href="static/css/admin.css" />
+    <link rel="stylesheet" href="./static/css/font-awesome.min.css" />
   </head>
   <body>
+    {% include '_header.html' %}
     <div class="admin-content">
       <div class="admin-panel">
         <div class="admin-holder">
@@ -50,5 +52,6 @@
       </div>
       <div class="user-search-panel"></div>
     </div>
+    {% include '_footer.html' %}
   </body>
 </html>

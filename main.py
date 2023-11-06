@@ -89,6 +89,7 @@ def register():
 # FUNCTION FOR ADMIN PAGE
 @app.route("/admin")
 def admin():
+  session['logged_in'] = True
   return render_template("admin.html")
 
 
