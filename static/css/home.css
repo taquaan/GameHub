@@ -1,3 +1,5 @@
+@import "styles.css";
+
 body {
   display: flex;
   justify-content: center;
@@ -6,6 +8,7 @@ body {
   color: white;
   flex-direction: column;
   font-size: 30px;
+  font-family: "Inter", Helvetica;
 }
 .content {
   width: 75%;
@@ -137,7 +140,7 @@ body {
   margin: 40px;
   background-color: #00000033;
   border-radius: 30px;
-  font-size: 30px;
+  font-size: 25px;
 }
 .flexing2 {
   display: flex;
@@ -145,8 +148,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+.product-item-vertical .flexing2 {
+  margin-right: 50px;
+}
 .product-item-vertical img {
-  width: 500px;
+  min-width: 500px;
   margin-right: 50px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
