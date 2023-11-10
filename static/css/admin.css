@@ -36,8 +36,8 @@ html {
   position: relative;
 }
 .admin-avatar-holder > .admin-avatar {
-  width: 80px;
-  height: 80px;
+  width: 4vw;
+  height: 4vw;
   border-radius: 50px;
 }
 .admin-avatar-holder > .user-status {
@@ -51,14 +51,14 @@ html {
 }
 .admin-holder > .admin-info > h3 {
   color: #fff;
-  font-size: 19px;
+  font-size: 0.9vw;
   font-weight: 400;
   line-height: 16px;
   margin-bottom: 13px;
 }
 .admin-holder > .admin-info > h5 {
   color: #909090;
-  font-size: 15px;
+  font-size: 0.8vw;
   font-weight: 400;
   line-height: 16px; /* 106.667% */
 }
@@ -71,7 +71,7 @@ html {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 15px 30px;
+  padding: 1vw 2vw;
   border-radius: 8px;
   margin-bottom: 20px;
   transition: 0.2s;
@@ -89,7 +89,7 @@ html {
 }
 .func > h4 {
   color: #909090;
-  font-size: 25px;
+  font-size: 1.3vw;
   font-weight: 400;
   line-height: 16px; /* 64% */
 }
@@ -101,18 +101,18 @@ html {
   height: 5.9vh;
   background-color: #2c2c2c;
   border-radius: 18px;
-  margin-bottom: 52px;
+  margin-bottom: 5.4vh;
 }
 .user-manager-panel > .search-bar > .fa-search {
   color: #5e5e5e;
-  width: 5%;
+  width: 4vw;
   text-align: center;
 }
 .user-manager-panel > .search-bar > .search-input {
   width: 50%;
   height: 100%;
   color: #5e5e5e;
-  font-size: 22px;
+  font-size: 1vw;
   font-weight: 400;
   background-color: #2c2c2c;
   border: none;
@@ -134,17 +134,15 @@ html {
 }
 .user-manager-panel > h1 {
   color: #c6c6c6;
-  font-size: 46px;
+  font-size: 2.1vw;
   font-weight: 400;
-  margin-bottom: 36px;
+  margin-bottom: 3.8vh;
 }
 .user-manager-panel > .user-search-flex > .users-container {
   width: 95%;
   height: 100%;
   justify-content: center;
   padding-right: 12px;
-  margin-top: 50px;
-  margin-bottom: 100px;
   overflow-y: auto;
 }
 .users-container::-webkit-scrollbar {
@@ -159,12 +157,12 @@ html {
 }
 .user-search-flex > .users-container > .user-holder {
   width: 100%;
-  height: 202px;
+  height: 30%;
   display: flex;
   align-items: center;
   gap: 2%;
   background-color: #1e1e1e;
-  margin-bottom: 35px;
+  margin-bottom: 3.6vh;
   border-radius: 8px;
 }
 .user-holder:last-child {
@@ -177,28 +175,32 @@ html {
   object-fit: cover;
   border-radius: 8px 0 0 8px;
 }
-.user-holder > .user-info-holder {
+.user-holder > .user-grid-holder {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 30% 60%;
   align-items: center;
-  column-gap: 200px;
+  column-gap: 10%;
   height: 100%;
+  width: 87.5%;
 }
-.user-info-holder > .user-stats {
-  display: grid;
-  grid-template-rows: 1fr 2fr;
+.user-grid-holder > .user-stats {
+  display: flex;
+  flex-direction: column;
   justify-content: end;
-  height: 100%;
+  height: 103%;
+  width: 100%;
+  row-gap: 5%;
+  padding-top: 0.5vw;
 }
 .user-info > .user-country {
   color: #5e5e5e;
-  font-size: 24px;
+  font-size: 1vw;
   font-weight: 400;
   margin-bottom: 14px;
 }
 .user-info > .username {
   color: #c7c7c7;
-  font-size: 49px;
+  font-size: 2vw;
   font-weight: 700;
   margin-bottom: 14px;
 }
@@ -209,25 +211,26 @@ html {
 }
 .user-info > .user-status > .user-online {
   background-color: #5b5b5b;
-  width: 20px;
-  height: 20px;
+  width: 1vw;
+  height: 1vw;
   border-radius: 50px;
 }
 .user-info > .user-status > h6 {
   color: #5b5b5b;
-  font-size: 16px;
+  font-size: 0.7vw;
   font-weight: 400;
 }
-.user-info-holder > .user-stats > .icon-container {
+.user-grid-holder > .user-stats > .icon-container {
   display: flex;
   align-items: center;
   gap: 12px;
   justify-content: end;
   margin-right: 12px;
-  margin-bottom: 6px;
+  height: 3rem;
   /* margin: 36px 8px 6px 0; */
 }
 .user-stats > .icon-container > .fix-icon {
+  height: 100%;
   padding: 10px;
   border: #8a8a8a 5px solid;
   border-radius: 2px;
@@ -235,6 +238,7 @@ html {
   cursor: pointer;
 }
 .user-stats > .icon-container > .delete-icon {
+  height: 100%;
   padding: 10px;
   border: red 5px solid;
   border-radius: 2px;
@@ -242,8 +246,8 @@ html {
   cursor: pointer;
 }
 .user-stats > .stats-container {
-  width: 750px;
-  height: 106%;
+  width: 100%;
+  height: 100%;
   background-color: #292929;
   justify-self: end;
 }
@@ -254,13 +258,17 @@ html {
   width: 100%;
   height: 100%;
 }
+.stats-flex > .total {
+  width: 3vw;
+  text-align: center;
+}
 .stats-flex > .total > h5 {
   color: #909090;
-  font-size: 18px;
+  font-size: 0.8vw;
   font-weight: 700;
 }
 .stats-flex > .total > h1 {
   color: #cacaca;
-  font-size: 44px;
+  font-size: 2vw;
   font-weight: 700;
 }
