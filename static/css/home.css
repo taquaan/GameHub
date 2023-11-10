@@ -154,6 +154,7 @@ body {
 }
 .product-item-vertical img {
   min-width: 500px;
+  max-width: 500px;
   margin-right: 50px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
