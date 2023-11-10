@@ -18,10 +18,10 @@
             <div class="carousel-indicator">
                 <div class="flexing">
                     <form action="/cart/add" method="POST">
-                        <input type=" hidden" name="product_id" value="{{ product[0] }}" style="display: none;">
+                        <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
                     </form>
                     <h3>Available Now</h3>
-                    <h2>{{ product[0] }}</h2>
+                    <h2>{{ product[1] }}</h2>
                     <h3>{{product[7]}}</h3>
                 </div>
                 <div class="flexing2">
@@ -45,10 +45,10 @@
             <div class="product-item-ex" style="background-image:url('{{product[11]}}')">
                 <div class="indicator">
                     <div class="indicator-detailed">
-                        <h2>{{ product[0] }}</h2>
+                        <h2>{{ product[1] }}</h2>
                         <div class="flexing">
                             <form action="/cart/add" method="POST">
-                                <input type=" hidden" name="product_id" value="{{ product[0] }}" style="display: none;">
+                                <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
                                 <input type="hidden" name="quantity" value="1" min="1">
                                 <button type="submit">Add to Cart</button>
                             </form>
@@ -66,13 +66,13 @@
             <div class="product-item-vertical">
                 <img src="{{product[11]}}" alt="{{product[11]}}">
                 <div class="flexing">
-                    <h2>{{ product[0] }}</h2>
+                    <h2>{{ product[1] }}</h2>
                 </div>
                 <div class="flexing2">
                     <h3>{{product[7]}}</h3>
                 </div>
                 <form action="/cart/add" method="POST">
-                    <input type=" hidden" name="product_id" value="{{ product[0] }}" style="display: none;">
+                    <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
 
                 </form>
             </div>
