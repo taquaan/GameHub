@@ -72,9 +72,10 @@ body {
 }
 .product-item,
 .product-item-ex {
+  font-size: 25px;
   cursor: pointer;
   width: 339px;
-  height: 452px;
+  height: 500px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -87,10 +88,10 @@ body {
 }
 .product-item-ex .indicator {
   width: 100%;
-  height: 30%;
+  height: 40%;
   background-color: rgba(0, 0, 0, 0.523);
   position: relative;
-  top: 316px;
+  top: 310px;
   display: flex;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;

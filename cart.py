@@ -71,7 +71,7 @@ def add_to_cart():
     quantity = int(request.form["quantity"])
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
-    cursor.execute("SELECT Name, Pric, Img_url_1 "
+    cursor.execute("SELECT Name, Pric, Title_Img "
                    "FROM mytable WHERE Name = ?",
                    (product_id,))
     product = cursor.fetchone()
