@@ -87,6 +87,19 @@ def register():
 
 
 # FUNCTION FOR ADMIN PAGE
+# Load data form UserDB
+def load_data_from_user(username):
+  if username != "":
+    # Trỏ tới UserDB
+    conn = sqlite3.connect(sqldbuser)
+    cursor = conn.cursor()
+    sqlcommand = ("Select * from users where username like '%" + username + "%'")
+    cursor.execute(sqlcommand)
+    data = cursor.fetchall()
+    conn.close()
+    return data
+  
+# Load admin page
 @app.route("/admin")
 def admin():
   session['logged_in'] = True
