@@ -35,7 +35,6 @@ def index():
 def searchData():
     search_text = request.form['searchInput']
     html_table,output_message = load_data_from_db(search_text)
-    print(html_table)
     return render_template(
         'Searching.html',
         search_text=search_text,

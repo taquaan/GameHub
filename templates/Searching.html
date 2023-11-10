@@ -40,16 +40,16 @@
             <div class="product-grid">
                 {% for product in table %}
                 <div class="product-item">
-                    <!-- <td>{{ product[0] }}</td> -->
+                    <!-- <td>{{ product[1] }}</td> -->
                     <!-- <td>{{ product[1] }}</td>
                 <td>{{ product[2] }}</td> -->
                     <img src="{{product[11]}}" alt="{{product[11]}}">
-                    <h2>{{ product[0] }}</h2>
+                    <h2>{{ product[1] }}</h2>
                     <h3>{{product[7]}}</h3>
                     <!-- <td>{{ product[6] }}</td> -->
 
                     <form action="/cart/add" method="POST">
-                        <input type=" hidden" name="product_id" value="{{ product[0] }}" style="display: none;">
+                        <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
                         <input type="hidden" name="quantity" value="1" min="1">
                         <button type="submit">Add to Cart</button>
                     </form>
