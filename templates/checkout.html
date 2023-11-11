@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | GameHub</title>
+    <link rel="stylesheet" href="./static/css/checkout.css" />
+    <link rel="stylesheet" href="./static/css/font-awesome.min.css" />
+  </head>
+  <body>
+    {% include '_header.html' %}
+    <main class="screen">
+      <div class="content">
+        {% if cart %}
+          <div class="page-title">
+            <h1>Checkout</h1>
+            <div class="wallet">
+              Your current wallet: <b>0đ</b>
+              <i class="fa-light fa-circle-plus"></i>
+            </div>
+          </div>
+          <!--Left column-->
+          <div class="left-col">
+
+            <div class="title">Order Information</div>
+            <form action="{{ url_for('proceed_checkout', order_uuid=order_uuid) }}" method="post">
+              <!-- Personal Information -->
+              <div class="grouped">
+                <div class="form-input">
+                  <label class="form-label" for="first_name">First Name*</label>
+                  <input class="form-input" type="text" id="first_name" name="first_name" required>
+                </div>
+                <div class="form-input">
+                  <label class="form-label" for="last_name">Last Name*</label>
+                  <input class="form-input" type="text" id="last_name" name="last_name" required>
+                </div>
+              </div>
+
+          
+              <!-- Address Information -->
+              <div class="form-input">
+                <label class="form-label" for="address">Address*</label>
+                <input class="form-input" type="text" id="address" name="address" required>
+              </div>
+              <div class="grouped">
+                <div class="form-input">
+                  <label class="form-label" for="city">City*</label>
+                  <input class="form-input" type="text" id="city" name="city" required>
+                </div>
+                <div class="form-input">
+                  <label class="form-label" for="country">Country*</label>
+                  <input class="form-input" type="text" id="country" name="country" required>
+                </div>
+              </div>
+          
+              <!-- Credit Card Information -->
+              <div id="credit-card" class="grouped">
+                <div id="cc-no" class="form-input">
+                  <label class="form-label" for="credit_card">Credit Card Number*</label>
+                  <input class="form-input" type="text" id="credit_card" name="credit_card" required>
+                </div>
+                <div id="cc-date" class="form-input">
+                  <label class="form-label" for="exp_date">Expiration Date*</label>
+                  <input class="form-input" type="text" id="exp_date" name="exp_date" placeholder="MM/YYYY" required>
+                </div>
+                <div id="cc-ccv" class="form-input">
+                  <label class="form-label" for="ccv">CCV*</label>
+                  <input class="form-input" type="text" id="ccv" name="ccv" required>
+                </div>
+
+              </div>
+          
+              <!-- Submit Button -->
+              <button type="submit" class="action">Proceed to Checkout</button>
+          </form>
+          </div>
+          <!--Left column-->
+          <div class="right-col">
+            <div class="title">Order Summary</div>
+            {% for item in cart %}
+            <div class="cart-item">
+              <div class="cart-info">
+                <div class="cover-art"><img src="{{ item.game_cover }}" alt=""></div>
+                <div class="name-price">
+                  <div class="game-name">
+                    <div id="game-title-placeholder">{{ item.title }}</div>
+                    <div class="game-price">
+                      {% if item.discount_per != 0 %}
+                      <div class="discount-per">-{{ "{:.0%}".format(item.discount_per) }}</div>
+                      {% endif %}
+                        {% if item.new_price != 0 %}
+                          <div class="new-price">{{ "{:,.0f}đ".format(item.new_price) }}</div>
+                        {% else %}
+                          <div class="new-price">Free</div>
+                        {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div class="actions">
+                  <button id="gift">Buy as Gift</button>
+                  <form action="{{ url_for('remove_from_cart') }}" method="post">
+                    <input type="hidden" name="game_id" value="{{item.id}}">
+                    <button id="remove">Remove</button>
+                  </form>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="divider"></div>
+            <div class="price-info subtotal">Subtotal<p>{{ "{:,.0f}đ".format(total_price) }}</p></div>
+          </div>
+        {% else %}
+          <div class="message">
+          <!-- Display a message when the cart is empty -->
+          <img src="./static/img/empty-cart.svg" alt="">
+          <p>Your cart is currently empty. <br><a href="{{ url_for('index') }}">Go shopping here!</a></p>
+          </div>
+        {% endif %}
+    </main>
+    {% include '_footer.html' %}
+  </body>
+</html>

@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign in</title>
-    <link rel="stylesheet" href="./static/css/register.css"/>
+    <title>Sign in | GameHub</title>
+    <link rel="stylesheet" href="./static/css/register.css" />
   </head>
   <body>
     <main>
@@ -18,10 +18,10 @@
           <div class="logo-holder">
             <a href="{{ url_for('index') }}">
               <img
-              src="./static/img/full-logo-vertical.svg"
-              alt="GameHub logo"
-              class="logo"
-              href=""
+                src="./static/img/full-logo-vertical.svg"
+                alt="GameHub logo"
+                class="logo"
+                href=""
               />
             </a>
           </div>
@@ -64,7 +64,10 @@
             </div>
             <div class="privacy-policy">
               <p>
-                By logging in or signing up, <br />
+                By
+                <a href="{{ url_for('login')}}"><span>logging in</span></a> or
+                <a href="{{ url_for('register') }}"><span>signing up</span></a
+                >, <br />
                 you agree with our <u class="policy">Privacy Policy</u>
               </p>
             </div>

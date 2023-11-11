@@ -27,7 +27,7 @@
             <form
               class="user-input-section"
               method="POST"
-              action="{{ url_for('register')}}"
+              action="http://127.0.0.1:5000/register"
             >
               <input
                 type="text"
@@ -60,21 +60,58 @@
             <p>or continue with</p>
             <div class="icon-holder">
               <div class="icon-flex-holder">
-                <img src="../static/img/facebook.svg" alt="facebook icon" />
-                <img src="../static/img/twitter.svg" alt="twitter icon" />
-                <img src="../static/img/google.svg" alt="google icon" />
-                <img src="../static/img/apple.svg" alt="apple icon" />
-                <img src="../static/img/steam.svg" alt="steam icon" />
+                <img src="./static/img/facebook.svg" alt="facebook icon" />
+                <img src="./static/img/twitter.svg" alt="twitter icon" />
+                <img src="./static/img/google.svg" alt="google icon" />
+                <img src="./static/img/apple.svg" alt="apple icon" />
+                <img src="./static/img/steam.svg" alt="steam icon" />
               </div>
             </div>
             <div class="privacy-policy">
               <p>
-                By logging in or signing up, <br />
+                By
+                <a href="{{ url_for('login')}}"><span>logging in</span></a> or
+                <a href="{{ url_for('register') }}"><span>signing up</span></a
+                >,
+                <br />
                 you agree with our <u class="policy">Privacy Policy</u>
               </p>
             </div>
           </div>
         </div>
+        {% if success %}
+        <div class="successful-noti">
+          <div class="logo-holder">
+            <img
+              src="./static/img/full-logo-vertical.svg"
+              alt="GameHub logo"
+              class="logo"
+            />
+          </div>
+          <h3 class="noti">Sign Up Successful!</h3>
+        </div>
+        <script>
+          setTimeout(function () {
+            window.location.href = "/";
+          }, 2700); // Redirect to main page after 2.7 second delay
+        </script>
+        {% elif success == False %}
+        <div class="successful-noti">
+          <div class="logo-holder">
+            <img
+              src="./static/img/full-logo-vertical.svg"
+              alt="GameHub logo"
+              class="logo"
+            />
+          </div>
+          <h3 class="noti">{{error}}</h3>
+        </div>
+        <script>
+          setTimeout(function () {
+            window.location.href = "/register";
+          }, 2700); // Redirect to main page after 2.7 second delay
+        </script>
+        {% endif %}
       </div>
     </main>
   </body>

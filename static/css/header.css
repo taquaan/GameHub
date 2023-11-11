@@ -1,63 +1,174 @@
 @import "styles.css";
-header {
+
+.header {
   display: flex;
+  width: 100%;
+  height: 140px;
   align-items: center;
+  justify-content: space-between;
+  top: 0;
   padding: 34px 128px;
-  background-color: #212121;
+  position: sticky;
+  background-color: #202020;
+  z-index: 999;
 }
-header > .main-compo-flex-holder {
-  display: flex;
+
+.header .nav {
+  display: inline-flex;
+  align-items: center;
   gap: 60px;
-  align-items: center;
-  justify-content: left;
-}
-header > .main-compo-flex-holder > .logo {
-  width: 24%;
-}
-header > .main-compo-flex-holder > .link {
-  text-decoration: none;
-}
-.main-compo-flex-holder > .link > h3 {
-  font-weight: 400;
-  color: #909090;
-  font-family: "Inter";
-  font-size: 28px;
-}
-.main-compo-flex-holder > .link > h3:hover {
-  color: #fff;
-  transition: 0.2s;
-}
-header > .side-compo-flex-holder {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-header > .side-compo-flex-holder > .icon-holder {
-  background-color: #4d4d4d;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  cursor: pointer;
-}
-.side-compo-flex-holder > .icon-holder > .icon {
-  width: 25px;
-}
-.side-compo-flex-holder > .dropdown {
-  cursor: pointer;
-}
-.avatar-holder {
   position: relative;
 }
-.avatar-holder > .user-avatar {
-  width: 72px;
-  height: 72px;
+
+.header .nav-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+}
+
+.header .nav-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.header .logo {
+  position: relative;
+  margin-top: 4px;
+  width: 280px;
+}
+
+.header .full-logo {
+  position: relative;
+  width: 100%;
+}
+
+.header .text-wrapper {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter", Helvetica;
+  font-weight: 300;
+  color: #ffffff80;
+  font-size: 26px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.header .text-wrapper:hover {
+  transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  color: white;
+}
+
+.header .button {
+  display: inline-block;
+  background-color: #444;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.header .button:hover {
+  transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  background-color: white;
+  color: black;
+}
+
+.header .searchbutton {
+  font-size: 20px;
+  padding-top: 1px;
+  padding-right: 1px;
+  border-radius: 100%;
+}
+
+.header .notibutton {
+  font-size: 22px;
+  padding-top: 1px;
+  border-radius: 100%;
+}
+
+.header .cartbutton {
+  font-size: 23px;
+  padding-top: 1px;
+  border-radius: 100%;
+}
+
+.header .loginbutton {
+  background-color: #df571d;
+  color: white;
+  font-family: "Inter", Helvetica;
+  font-size: 22px;
+  font-weight: 300;
+  text-align: center;
+  width: 120px;
   border-radius: 50px;
 }
-.avatar-holder > .user-status {
+
+.header .dropdown {
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+}
+
+.header .dropdown-content {
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  left: 0;
+}
+
+.header .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  left: auto;
+  right: 0;
+  margin-right: -10px;
+}
+
+.header .avatar-holder {
+  position: relative;
+}
+
+.header .avatar-holder .user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+}
+
+.header .avatar-holder .user-status {
   position: absolute;
   width: 16px;
   height: 16px;

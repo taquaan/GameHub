@@ -3,13 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign in</title>
-    <link rel="stylesheet" href="./static/css/main.css" />
+    <title>{{game_title}} | GameHub</title>
+    <link rel="stylesheet" href="./static/css/product-page.css" />
     <link rel="stylesheet" href="./static/css/font-awesome.min.css" />
     <link rel="stylesheet" href="./static/scripts/splide-4.1.3/dist/css/themes/splide-white.min.css">
     <script type="text/javascript" src="./static/scripts/splide-4.1.3/dist/js/splide.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/css/splide-extension-video.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/js/splide-extension-video.min.js"></script>
+    <script>
+      // Use Flask's Jinja2 templating to insert the GameID from Flask
+      const GameID = {{ GameID }};
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
     {% include '_header.html' %}
@@ -29,20 +34,24 @@
           <section id="main-slider" class="splide" aria-label="Screenshots">
             <div class="splide__track">
               <ul class="splide__list">
-                <li class="splide__slide" data-splide-youtube="https://www.youtube.com/watch?v=i7wgl1v1_5M"><img src="./static/img/genshin_impact/thumbnail.jpeg" alt=""/></li>
-                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-1.jpeg" alt=""/></li>
-                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-2.jpeg" alt=""/></li>
-                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-3.jpeg" alt=""/></li>
-                <li class="splide__slide"><img src="./static/img/genshin_impact/screenshot-4.jpeg" alt=""/></li>
+                {% if trailer %}
+                <li class="splide__slide" data-splide-youtube="{{ trailer }}"><img src="{{ trailer_thumb }}" alt=""/></li>
+                {% endif %}
+                <li class="splide__slide"><img src="{{ thumbnail_1 }}" alt=""/></li>
+                <li class="splide__slide"><img src="{{ thumbnail_2 }}" alt=""/></li>
+                <li class="splide__slide"><img src="{{ thumbnail_3 }}" alt=""/></li>
+                <li class="splide__slide"><img src="{{ thumbnail_4 }}" alt=""/></li>
               </ul>
             </div>
           </section>
           <ul id="thumbnails" class="thumbnails">
-            <li class="thumbnail" data-splide-youtube="https://www.youtube.com/watch?v=i7wgl1v1_5M"><img src="./static/img/genshin_impact/thumbnail.jpeg" alt=""/></li>
-            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-1.jpeg" alt="" /></li>
-            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-2.jpeg" alt="" /></li>
-            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-3.jpeg" alt="" /></li>
-            <li class="thumbnail"><img src="./static/img/genshin_impact/screenshot-4.jpeg" alt="" /></li>
+            {% if trailer %}
+            <li class="thumbnail" data-splide-youtube="{{ trailer }}"><img src="{{ trailer_thumb }}" alt=""/></li>
+            {% endif %}
+            <li class="thumbnail"><img src="{{ thumbnail_1 }}" alt="" /></li>
+            <li class="thumbnail"><img src="{{ thumbnail_2 }}" alt="" /></li>
+            <li class="thumbnail"><img src="{{ thumbnail_3 }}" alt="" /></li>
+            <li class="thumbnail"><img src="{{ thumbnail_4 }}" alt="" /></li>
           </ul>
           <script>
             var splide = new Splide("#main-slider", {
@@ -83,121 +92,93 @@
             splide.mount();
           </script>
           <section id="game-description" class="description">
-            <h1>Step into Teyvat, a vast world teeming with life and flowing with elemental energy.</h1>
-            <p><b>MASSIVE OPEN WORLD</b></p>
-            <p>Climb any mountain, swim across any river, and glide over the world below, taking in the jaw-dropping scenery each step of the way. And if you stop to investigate a wandering Seelie or strange mechanism, who knows what you might discover?</p>
-            <p><b>ELEMENTAL COMBAT SYSTEM</b></p>
-            <p>Harness the seven elements to unleash elemental reactions. Anemo, Electro, Hydro, Pyro, Cryo, Dendro, and Geo interact in all sorts of ways, and Vision wielders have the power to turn this to their advantage. Will you vaporize Hydro with Pyro, electro-charge it with Electro, or freeze it with Cryo? Your mastery of the elements will give you the upper hand in battle and exploration.</p>
-            <p><b>BEAUTIFUL VISUALS</b></p>
-            <p>Feast your eyes on the world around you, with a stunning art style, real-time rendering, and finely tuned character animations delivering you a truly immersive visual experience. Lighting and weather all change naturally over time, bringing every detail of this world to life.</p>
-            <p><b>SOOTHING SOUNDTRACK</b></p>
-            <p>Let the beautiful sounds of Teyvat draw you in as you explore the expansive world around you. Performed by the world's top orchestras such as London Philharmonic Orchestra and Shanghai Symphony Orchestra, the soundtrack changes seamlessly with the time and gameplay to match the mood.</p>
-            <p><b>BUILD YOUR DREAM TEAM</b></p>
-            <p>Team up with a diverse cast of characters in Teyvat, each with their own unique personalities, stories, and abilities. Discover your favorite party combinations and level up your characters to help you conquer even the most daunting of enemies and domains.</p>
-            <p><b>JOURNEY WITH FRIENDS</b></p>
-            <p>Team up with friends across various platforms to trigger more elemental action, tackle tricky boss fights, and conquer challenging domains together to reap rich rewards.</p>
-            <p>As you stand atop the peaks of Jueyun Karst and take in the rolling clouds and vast terrain stretching out before you, you may wish to stay in Teyvat a little longer... But until you are reunited with your lost sibling, how can you rest? Go forth, Traveler, and begin your adventure!</p>
-            <p><b>SUPPORT</b></p>
-            <p>If you encounter any issues during the game, you can send us feedback via the in-game Customer Service Center.</p>
-            <p>Customer Service Email: genshin_cs@hoyoverse.com</p>
+            <div id="game-desc-placeholder"></div>
           </section>
           <div class="divider"></div>
           <section id="update-logs" class="description">
             <div class="section-title">What’s New?</div>
-            <p><b>Version 4.1 "To the Stars Shining in the Depths" is now available!</b></p>
-            <li>New Areas: Liffey Region and Fontaine Research Institute of Kinetic Energy Engineering Region</li>
-            <li>New Characters: Neuvillette and Wriothesley</li>
-            <li>New Stories: New Archon Quests and Story Quests</li>
-            <li>New Bosses: Millennial Pearl Seahorse and Experimental Field Generator</li>
-            <li>New Weapons: Tome of the Eternal Flow, Cashflow Supervision, and Ballad of the Boundless Blue</li>
-            <li>Genius Invokation TCG Update: New Character Cards and Action Cards</li>
+            <div id="update-logs-placeholder"></div>
           </section>
           <section id="specifications" class="description">
             <div class="section-title">Specifications</div>
             <div class="systab">
-              <button class="tablinks" onclick="osTab(event, 'Windows')" id="defaultOpen">Windows</button>
-              <button class="tablinks" onclick="osTab(event, 'macOS')">macOS</button>
-              <button class="tablinks" onclick="osTab(event, 'Linux')">Linux</button>
+              <button class="tablinks" onclick="osTab(event, 'Windows')" id="defaultOpen"><div id="supported-os-win">Windows</div></button>
+              <button class="tablinks" onclick="osTab(event, 'macOS')"><div id="supported-os-mac">macOS</div></button>
+              <button class="tablinks" onclick="osTab(event, 'Linux')"><div id="supported-os-linux">Linux</div></button>
             </div>
             <div id="Windows" class="specs">
               <div class="sysreq">
-                <div class="syscolumn">
+                <div id="Minimum" class="syscolumn">
                   <div class="title">Minimum</div>
-                  <div class="title">OS<p>Windows 7 SP1 64-bit or newer</p></div>
-                  <div class="title">Processor<p>Intel Core i5 or equivalent</p></div>
-                  <div class="title">Memory<p>16 GB</p></div>
-                  <div class="title">Storage<p>30 GB</p></div>
-                  <div class="title">DirectX<p>11</p></div>
-                  <div class="title">Graphics<p>NVIDIA® GeForce® GT 1030 or better</p></div>
-                  <div class="title">Additional Notes<p>60 FPS @ 1280x720, Preset "Low", 2GB VRAM required</p></div>
+                  <div class="title">OS<div id="MinOSWin"></div></div>
+                  <div class="title">Processor<div id="MinProcessorWin"></div></div>
+                  <div class="title">Memory<div id="MinMemoryWin"></div></div>
+                  <div class="title">Storage<div id="MinStorageWin"></div></div>
+                  <div class="title">DirectX<div id="MinDirectXWin"></div></div>
+                  <div class="title">Graphics<div id="MinGraphicsWin"></div></div>
+                  <div class="title">Network<div id="MinNetworkWin"></div></div>
+                  <div class="title">Additional Notes<div id="MinNotesWin"></div></div>
                 </div>
-                <div class="syscolumn">
+                <div id="Recommended" class="syscolumn">
                   <div class="title">Recommended</div>
-                  <div class="title">OS<p>Windows 7 SP1 64-bit or newer</p></div>
-                  <div class="title">Processor<p>Intel Core i7 or equivalent</p></div>
-                  <div class="title">Memory<p>16 GB</p></div>
-                  <div class="title">Storage<p>30 GB</p></div>
-                  <div class="title">DirectX<p>11</p></div>
-                  <div class="title">Graphics<p>NVIDIA® GeForce® GT 1080 or better</p></div>
-                  <div class="title">Additional Notes<p>60 FPS @ 1920x1080, Preset "Highest", Systen RAM 16GB required when running on Intel GPU</p></div>
+                  <div class="title">OS<div id="RecOSWin"></div></div>
+                  <div class="title">Processor<div id="RecProcessorWin"></div></div>
+                  <div class="title">Memory<div id="RecMemoryWin"></div></div>
+                  <div class="title">Storage<div id="RecStorageWin"></div></div>
+                  <div class="title">DirectX<div id="RecDirectXWin"></div></div>
+                  <div class="title">Graphics<div id="RecGraphicsWin"></div></div>
+                  <div class="title">Network<div id="RecNetworkWin"></div></div>
+                  <div class="title">Additional Notes<div id="RecNotesWin"></div></div>
                 </div>
               </div>
-              <div class="title">Language Supported
-                <p>Audio: Chinese - Simplified, English, Korean, Japanese.</p>
-                <p>Text: Chinese - Simplified, Chinese - Traditional, English, French, German, Italian, Japanese, Korean, Portuguese, Portuguese - Brazil, Russian, Spanish - Spain, Spanish - Latin America, Thai, Turkish, Vietnamese</p>
-              </div>
-              <div class="divider"></div>
-              <div class="title copyright">Copyright © COGNOSPHERE. All Rights Reserved.<p>Privacy Policy</p></div>
             </div>
             <div id="macOS" class="specs">
               <div class="sysreq">
-                <div class="syscolumn">
+                <div id="Minimum" class="syscolumn">
                   <div class="title">Minimum</div>
-                  <div class="title">OS<p>macOS 10.14.5 Mojave or newer</p></div>
-                  <div class="title">Processor<p>Intel Core i7-3770 / AMD FX-9590 / Apple M1</p></div>
-                  <div class="title">Memory<p>16 GB</p></div>
-                  <div class="title">Storage<p>30 GB</p></div>
-                  <div class="title">DirectX<p>11</p></div>
-                  <div class="title">Graphics<p>NVIDIA® GeForce® GTX 670 2GB / AMD™ R9 280</p></div>
-                  <div class="title">Additional Notes<p>60 FPS @ 1280x720, Preset "Low", 2GB VRAM required. Metal is required.</p></div>
+                  <div class="title">OS<div id="MinOSMac"></div></div>
+                  <div class="title">Processor<div id="MinProcessorMac"></div></div>
+                  <div class="title">Memory<div id="MinMemoryMac"></div></div>
+                  <div class="title">Storage<div id="MinStorageMac"></div></div>
+                  <div class="title">Graphics<div id="MinGraphicsMac"></div></div>
+                  <div class="title">Network<div id="MinNetworkMac"></div></div>
+                  <div class="title">Additional Notes<div id="MinNotesMac"></div></div>
                 </div>
-                <div class="syscolumn">
+                <div id="Recommended" class="syscolumn">
                   <div class="title">Recommended</div>
-                  <div class="title">OS<p>macOS 10.14.5 Mojave or newer</p></div>
-                  <div class="title">Processor<p>Intel Core i7-4790K / AMD Ryzen 5 1600 / Apple M1</p></div>
-                  <div class="title">Memory<p>16 GB</p></div>
-                  <div class="title">Storage<p>30 GB</p></div>
-                  <div class="title">DirectX<p>11</p></div>
-                  <div class="title">Graphics<p>NVIDIA® GeForce® GTX 980 / AMD™ R9 Fury</p></div>
-                  <div class="title">Additional Notes<p>60 FPS @ 1920x1080, Preset "Highest", Systen RAM 16GB required when running on Intel GPU</p></div>
+                  <div class="title">OS<div id="RecOSMac"></div></div>
+                  <div class="title">Processor<div id="RecProcessorMac"></div></div>
+                  <div class="title">Memory<div id="RecMemoryMac"></div></div>
+                  <div class="title">Storage<div id="RecStorageMac"></div></div>
+                  <div class="title">Graphics<div id="RecGraphicsMac"></div></div>
+                  <div class="title">Network<div id="RecNetworkMac"></div></div>
+                  <div class="title">Additional Notes<div id="RecNotesMac"></div></div>
                 </div>
               </div>
-              <div class="title">Language Supported
-                <p>Audio: Chinese - Simplified, English, Korean, Japanese.</p>
-                <p>Text: Chinese - Simplified, Chinese - Traditional, English, French, German, Italian, Japanese, Korean, Portuguese, Portuguese - Brazil, Russian, Spanish - Spain, Spanish - Latin America, Thai, Turkish, Vietnamese</p>
-              </div>
-              <div class="divider"></div>
-              <div class="title copyright">Copyright © COGNOSPHERE. All Rights Reserved.<p>Privacy Policy</p></div>
             </div>
             <div id="Linux" class="specs">
               <div class="sysreq">
-                <div class="syscolumn">
+                <div id="Minimum" class="syscolumn">
                   <div class="title">Minimum</div>
-                  <div class="title">OS<p>Ubuntu 12.04 or newer</p></div>
-                  <div class="title">Processor<p>Intel Core i5 or equivalent</p></div>
-                  <div class="title">Memory<p>16 GB</p></div>
-                  <div class="title">Storage<p>30 GB</p></div>
-                  <div class="title">DirectX<p>11</p></div>
-                  <div class="title">Graphics<p>NVIDIA® GeForce® GT 1030 or better</p></div>
-                  <div class="title">Additional Notes<p>60 FPS @ 1280x720, Preset "Low", 2GB VRAM required</p></div>
+                  <div class="title">OS<div id="MinOSLinux"></div></div>
+                  <div class="title">Processor<div id="MinProcessorLinux"></div></div>
+                  <div class="title">Memory<div id="MinMemoryLinux"></div></div>
+                  <div class="title">Storage<div id="MinStorageLinux"></div></div>
+                  <div class="title">Graphics<div id="MinGraphicsLinux"></div></div>
+                  <div class="title">Network<div id="MinNetworkLinux"></div></div>
+                  <div class="title">Additional Notes<div id="MinNotesLinux"></div></div>
+                </div>
+                <div id="Recommended" class="syscolumn">
+                  <div class="title">Recommended</div>
+                  <div class="title">OS<div id="RecOSLinux"></div></div>
+                  <div class="title">Processor<div id="RecProcessorLinux"></div></div>
+                  <div class="title">Memory<div id="RecMemoryLinux"></div></div>
+                  <div class="title">Storage<div id="RecStorageLinux"></div></div>
+                  <div class="title">Graphics<div id="RecGraphicsLinux"></div></div>
+                  <div class="title">Network<div id="RecNetworkLinux"></div></div>
+                  <div class="title">Additional Notes<div id="RecNotesLinux"></div></div>
                 </div>
               </div>
-              <div class="title">Language Supported
-                <p>Audio: Chinese - Simplified, English, Korean, Japanese.</p>
-                <p>Text: Chinese - Simplified, Chinese - Traditional, English, French, German, Italian, Japanese, Korean, Portuguese, Portuguese - Brazil, Russian, Spanish - Spain, Spanish - Latin America, Thai, Turkish, Vietnamese</p>
-              </div>
-              <div class="divider"></div>
-              <div class="title copyright">Copyright © COGNOSPHERE. All Rights Reserved.<p>Privacy Policy</p></div>
             </div>
             <script>
             function osTab(evt, osName) {
@@ -217,6 +198,12 @@
             // Get the element with id="defaultOpen" and click on it
             document.getElementById("defaultOpen").click();
             </script>
+            <div class="otherspecs title">Language Supported
+              <p>Audio: <span id="audio-placeholder" class="inline"></span></p>
+              <p>Text: <span id="text-placeholder" class="inline"></span></p>
+            </div>
+            <div class="otherspecs divider"></div>
+            <div class="otherspecs title copyright"><div id="copyright-placeholder"></div></div>
           </section>
           <section id="recommendations" class="description">
             <div class="section-title">More like this</div>
@@ -313,9 +300,9 @@
         
         <!--Right column-->
         <div class="right-col">
-          <div class="game-cover"><img src="./static/img/genshin_impact/cover-art.jpeg" alt="" /></div>
+          <div class="game-cover"><img src=" {{ cover_art }} " alt="" /></div>
           <div class="game-info">
-            <div class="game-name">Genshin Impact</div>
+            <div class="game-name"><div id="game-title-placeholder"></div></div>
             <div class="rating">
               <i class="fa fa-star-sharp"></i>
               <i class="fa fa-star-sharp"></i>
@@ -324,23 +311,59 @@
               <i class="fa-regular fa-star-sharp-half-stroke"></i>
               <div class="overall-rating">Overwhelmingly Positive</div>
             </div>
-            <div class="price">
-              <div class="discount-per">-50%</div>
+            <div class="price" id="price-container">
+              <div class="discount-per" id="discount-per-container"></div>
               <div class="specific">
-                <div class="old-price">$59.99</div>
-                <div class="new-price">$29.99</div>
-                <div class="footnote">Includes in-app purchases</div>
+                <div class="old-price"></div>
+                <div class="new-price"></div>
+                <div class="footnote"></div>
               </div>
             </div>
           </div>
           <div id="actions" class="game-info">
             <div class="buttons-container">
-              <button class="action">BUY</button>
-              <button>FREE DEMO</button>
-              <button>ADD TO CART</button>
-              <button><i class="fa-light fa-circle-plus" style="margin: 10px;"></i>ADD TO WISHLIST</button>
+              <form id="purchase-form" action="{{ url_for('buy') }}" method="POST">
+                <input type="hidden" name="game_id" value="{{ GameID }}">
+                <input type="hidden" name="game_title" value="{{ game_title }}">
+                <input type="hidden" name="old_price" value="{{ old_price }}">
+                <input type="hidden" name="discount_per" value="{{ discount }}">
+                <input type="hidden" name="new_price" value="{{ new_price }}">
+                <input type="hidden" name="supported_os" value="{{ supported_os }}">
+                <input type="hidden" name="game_cover" value="{{ cover_art }}">
+                <input type="hidden" name="in_app" value="{{ in_app }}">
+                <button id="get-download" type="submit" class="action">
+                  {% if new_price == 0 %}
+                    DOWNLOAD
+                  {% else %}
+                    BUY
+                  {% endif %}
+                </button>
+              </form>
+              <form id="add-to-cart-form" action="{{ url_for('add_to_cart') }}" method="POST">
+                <input type="hidden" name="game_id" value="{{ GameID }}">
+                <input type="hidden" name="game_title" value="{{ game_title }}">
+                <input type="hidden" name="old_price" value="{{ old_price }}">
+                <input type="hidden" name="discount_per" value="{{ discount }}">
+                <input type="hidden" name="new_price" value="{{ new_price }}">
+                <input type="hidden" name="supported_os" value="{{ supported_os }}">
+                <input type="hidden" name="game_cover" value="{{ cover_art }}">
+                <input type="hidden" name="in_app" value="{{ in_app }}">
+                <button id="add-to-cart" type="submit">ADD TO CART</button>
+              </form>
+              <form id="add-to-cart-form" action="{{ url_for('add_to_wishlist') }}" method="POST">
+                <input type="hidden" name="game_id" value="{{ GameID }}">
+                <input type="hidden" name="game_title" value="{{ game_title }}">
+                <input type="hidden" name="old_price" value="{{ old_price }}">
+                <input type="hidden" name="discount_per" value="{{ discount }}">
+                <input type="hidden" name="new_price" value="{{ new_price }}">
+                <input type="hidden" name="supported_os" value="{{ supported_os }}">
+                <input type="hidden" name="game_cover" value="{{ cover_art }}">
+                <input type="hidden" name="in_app" value="{{ in_app }}">
+                <button id="add-wishlist"><i class="fa-light fa-circle-plus" style="margin: 10px;"></i>ADD TO WISHLIST</button>
+              </form>
             </div>
           </div>
+          <!--
           <div id="dlc" class="game-info">
             <div class="dlc">
               <p>Downloadable Contents</p>
@@ -351,15 +374,16 @@
               </div>
             </div>
           </div>
+          -->
           <div id="publisher" class="game-info">
             <div class="publisher">
-              <div class="publisher-info">Developer<p>COGNOSPHERE PTE. LTD.</p></div>
-              <div class="publisher-info">Publisher<p>COGNOSPHERE PTE. LTD.</p></div>
-              <div class="publisher-info">Release Date<p>06/08/2021</p></div>
-              <div class="publisher-info">Platform<h6>
-                <i class="fa-brands fa-microsoft"></i>
-                <i class="fa-brands fa-apple"></i>
-                <i class="fa-brands fa-linux"></i>
+              <div class="publisher-info">Developer<p id="developer-placeholder"></p></div>
+              <div class="publisher-info">Publisher<p id="publisher-placeholder"></p></div>
+              <div class="publisher-info">Release Date<p id="release-date-placeholder"></p></div>
+              <div class="publisher-info">Platform<h6 id="supported-os">
+                <div id="supported-os-win"><i class="fa-brands fa-microsoft"></i></div>
+                <div id="supported-os-mac"><i class="fa-brands fa-apple"></i></div>
+                <div id="supported-os-linux"><i class="fa-brands fa-linux"></i></div>
               </h6></div>
             </div>
           </div>
@@ -388,7 +412,6 @@
                 <div class="tab"><i class="fa-solid fa-user-group-simple"></i>Online Co-Op</div>
                 <div class="tab"><i class="fa-solid fa-gamepad-modern"></i>Controller Support</div>
                 <div class="tab"><i class="fa-solid fa-cloud"></i>Online Saves</div>
-                <div class="tab"><i class="fa-solid fa-floppy-disk"></i>Offline Saves</div>
                 <div class="tab"><i class="fa-solid fa-trophy"></i>Achievements</div>
                 <div class="notice">Requires 3rd Party Login: HoYoverse Account</div>
               </div>
@@ -403,6 +426,7 @@
         </div>
       </div>
     </main>
+    <script src="./static/scripts/scripts.js"></script>
     {% include '_footer.html' %}
   </body>
 </html>

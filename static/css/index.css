@@ -1,0 +1,730 @@
+@import "styles.css";
+@import "header.css";
+@import "footer.css";
+
+
+main {
+    background-color: #121212;
+}
+
+.content{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 30px;
+    padding-left: 128px;
+    padding-right: 128px;
+}
+
+.left-col{
+    grid-column: 1 / 5;
+}
+
+.right-col{
+    grid-column: 5 / 7;
+}
+
+.directory {
+    padding-left: 128px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    position: relative;
+    align-self: stretch;
+    font-family: "Inter", Helvetica;
+    font-weight: 300;
+    color: transparent;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.directory-text {
+    color: #8F98A0;
+}
+
+.directory-text-2 {
+    color: #727272;
+}
+
+.splide {
+    margin: 0 auto;
+  }
+
+.thumbnails {
+    display: flex;
+    margin: 1rem auto 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.thumbnail {
+    width: 160px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    list-style: none;
+    margin: 0 0.5em;
+    cursor: pointer;
+    opacity: 0.3;
+    border-radius: 10px;
+}
+
+.thumbnail.is-active {
+    opacity: 1;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.splide__arrow svg {
+    fill: white !important;
+}
+
+.splide__arrow:hover svg {
+    fill: #df571d !important;
+}
+
+.description {
+    margin-top: 40px;
+    color: #B8B8B8;
+    font-family: 'Inter', Helvetica;
+    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.description {
+    margin-top: 40px;
+    color: #B8B8B8;
+    font-family: 'Inter', Helvetica;
+    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+.description h1{
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.description h5{
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.description h6{
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.description p, br{
+    color: #B8B8B8;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.description b{
+    font-weight: 600;
+}
+
+.description ul{
+    color: #B8B8B8;
+    font-weight: 300;
+    margin-bottom: 20px;
+    margin-left: 30px
+}
+
+.description li b{
+    font-weight: 600;;
+}
+
+.description li{
+    margin: 10px 0 10px 0;
+}
+
+
+.splide__track {
+    border-radius: 20px;
+}
+
+
+.divider {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    height: 1px;
+    object-fit: cover;
+    background-color: #727272;
+}
+
+.description .section-title {
+    color: #FF7020;
+    font-weight: 300;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.systab {
+    overflow: hidden;
+    border-bottom: 1px solid #72727250;
+    margin-bottom: 30px;
+}
+
+.systab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    border-bottom: 0 solid #ffffff;
+    cursor: pointer;
+    padding: 10px 16px;
+    font-size: 20px;
+    font-family: 'Inter', Helvetica;
+    color: #727272;
+    font-weight:300;
+  }
+
+.systab button:hover {
+    color: #ffffff;
+}
+
+.systab button.active {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    font-weight:600;
+}
+
+.specs .sysreq{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.specs .syscolumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+}
+
+.specs .syscolumn.hidden {
+    display: none;
+}
+
+
+.specs .title {
+    color: #727272;
+    font-size: 18px;
+}
+
+.specs .title div {
+    color: #B8B8B8;
+    margin-bottom: 0;
+}
+
+.otherspecs.title {
+    color: #727272;
+    font-size: 18px;
+}
+
+.otherspecs.title p {
+    color: #B8B8B8;
+    margin-bottom: 0;
+}
+
+.otherspecs.divider {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    opacity: 0.5;
+}
+
+.otherspecs.title.copyright {
+    text-align: center;
+}
+
+.recommendation{
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    background-color: #00000050;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.recommendation .thumbnail{
+    width: 250px;
+    opacity: 1;
+    border-radius: 10px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.game-cover {
+    margin-bottom: -10px;
+}
+
+.game-cover img{
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.game-info {
+    margin-top: 40px;
+    color: #FFFFFF;
+    font-family: 'Inter', Helvetica;
+    font-weight: 300;
+}
+
+.game-name {
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+
+.game-info .rating {
+    font-size: 20px;
+    color: #B8B8B8;
+    letter-spacing: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.game-info .overall-rating {
+    color: #00FF0A80;
+    letter-spacing: 0px;
+    font-size: 16px;
+    font-family: "Inter", Helvetica;
+    font-weight: 300;
+    padding: 5px 10px 5px 10px;
+    background-color: #00FF0A20;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.game-info .price {
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.game-info .discount-per {
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    border-radius: 10px;
+    background: #df571d;
+}
+
+.game-info .price .specific{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 10px;
+    row-gap: 5px;
+}
+
+.game-info .price .old-price {
+    font-size: 28px;
+    font-style: normal;
+    line-height: 100%; /* 32px */
+    text-decoration-line: line-through;
+    opacity: 50%;
+}
+
+.game-info .price .new-price {
+    font-size: 28px;
+    font-style: normal;
+    line-height: 100%; /* 32px */
+}
+
+.game-info .price .footnote {
+    color: #727272;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 100%;
+}
+
+.game-info .buttons-container{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+    margin-top: 20px;
+}
+
+.game-info button{
+    transition: 0.4s;
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    flex-grow: 1;
+    border-radius: 10px;
+    border: 1.5px solid #B8B8B8;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.game-info button:hover{
+    background-color: #ffffff20;
+}
+
+.game-info button.action{
+    background: #df571d;
+    border: 0px;
+    font-weight: 600;
+}
+
+.game-info button.action:hover{
+    background: #ffffff;
+    color: #000000;
+}
+
+form {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center; 
+}
+
+.game-info p {
+    font-size: 20px;
+    color: #727272;
+}
+
+.game-info .dlc-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #00000050;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.game-info .dlc-container .dlc-name {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.game-info .dlc-container .dlc-price {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
+.game-info .publisher {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-info .publisher .publisher-info {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    border-bottom: 1px solid #72727250;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    color: #727272;
+}
+
+.game-info .publisher .publisher-info p {
+    color: #ffffff;
+    opacity: 1;
+    font-size: 20px;
+    text-transform:uppercase;
+}
+
+.game-info .publisher .publisher-info h6 {
+    color: #ffffff;
+    font-size: 28px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.game-info .publisher .publisher-info i {
+    font-size: 28px;
+    margin-left: 5px;
+}
+
+.game-info .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.game-info .tags p {
+    color: #FF702090;
+    letter-spacing: 0px;
+    font-size: 16px;
+    font-family: "Inter", Helvetica;
+    font-weight: 300;
+    padding: 5px 10px 5px 10px;
+    background-color: #FF702025;
+    border-radius: 10px;
+}
+
+.game-info .esrb {
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+.game-info .esrb-icon {
+    width: 60px;
+}
+
+.game-info .esrb-icon img {
+    width: 100%;
+}
+
+.game-info .esrb-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.game-info .esrb-content b {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.game-info .divider {
+    opacity: 0.5;
+}
+
+.game-info .features .feature-tabs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.feature-tabs .tab{
+    display: flex;
+    padding: 15px 20px 15px 10px;
+    align-items: center;
+    align-self: stretch;
+    background-color: #00000050;
+    color:#b8b8b8;
+    font-size: 18px;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+.feature-tabs i{
+    width: 50px;
+    text-align: center;
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.feature-tabs .notice{
+    display: flex;
+    padding: 15px 20px 15px 20px;
+    align-items: center;
+    align-self: stretch;
+    background-color: #ebad1050;
+    color:#b8b8b8;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+.game-info .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.actions button {
+    height: 55px;
+    align-self: stretch;
+    flex: 1 0 0;
+    font-size: 14px;
+}
+
+.actions button i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.review {
+    margin-top: 20px;
+}
+
+.review .overall-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    margin-bottom: 20px;
+}
+
+.review .rating_stars {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.review .overall-rating .rating {
+    color: #FFFFFF;
+    font-size: 56px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.review .overall-rating .stars {
+    display: flex;
+    align-items: flex-start;
+    gap: 3px;
+    font-size: 40px;
+}
+
+.review .overall-review {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+    align-self: stretch;
+}
+
+.review .title {
+    font-size: 16px;
+}
+
+.review .overall-review {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.review .overall-review .status {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    align-self: stretch;
+}
+
+
+.review .overall-review .status .div {
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.review .critics-review .reviews {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.review .critics-review .container {
+    padding: 20px;
+    background-color: #00000033;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    flex-grow: 1;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+  
+.critics-review .review-info {
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+  
+.critics-review .source {
+    position: relative;
+    width: fit-content;
+    color: #ffffff;
+}
+  
+.critics-review .author {
+    position: relative;
+    width: fit-content;
+}
+  
+.critics-review .divider {
+    opacity: 0.5;
+ }
+  
+.critics-review .score {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+    align-self: stretch;
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    color: #ffffff;
+}
+
+  
+.score p {
+    position: relative;
+    align-self: stretch;
+    color: #b8b8b8;
+}
+  
+.critics-review .full-review {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    flex: 0 0 auto;
+}
+  
+.full-review i {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.critics-review .title {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
