@@ -13,18 +13,21 @@
             <div class="searchbytext">
                 <form method="POST" action="/searchData">
                     <input type="text" name="searchInput" placeholder="Enter your search term">
-                    <button type="submit">Search</button>
+                    <button type="submit" style="display: none;">Search</button>
                 </form>
             </div>
             <div class="filterbygenre">
                 <form method="POST" action="/filter">
-                    <input type="checkbox" name="filter" value="FPS">
-                    <span>FPS</span>
-                    <input type="checkbox" name="filter" value="Multiplayer">
-                    <span>Multiplayer</span><br>
-                    <input type="checkbox" name="filter" value="Single">
-                    <span>Single</span><br>
-                    <input type="submit" value="Filter" style="display: none;">
+                    <div class="field"> <input type="checkbox" name="filter" value="FPS">
+                        <span>FPS</span>
+                    </div>
+                    <div class="field"> <input type="checkbox" name="filter" value="Multiplayer">
+                        <span>Multiplayer</span><br>
+                    </div>
+                    <div class="field"> <input type="checkbox" name="filter" value="Single">
+                        <span>Single</span><br>
+                    </div>
+                    <button type="submit" value="Filter">Filter></button>
                 </form>
             </div>
         </div>
