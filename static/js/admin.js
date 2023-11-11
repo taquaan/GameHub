@@ -1,21 +1,28 @@
-// Function to show popup
-let popupShow = document.querySelector(".delete-icon");
-// Function to toggle the class 'hidden' on popup div
-function toggleShowClass() {
-  const popup = document.querySelector(".delete-user-confirm");
-  console.log(popup);
-  popup.classList.toggle("popup-hidden");
-}
-// Add event listener to the delete icon
-popupShow.addEventListener("click", toggleShowClass);
+// Get all open popup buttons
+let openPopupButtons = document.querySelectorAll(".delete-icon");
 
-// Function to hide popup
-let popupHide = document.querySelector(".cancel-button");
-// Function to toggle the class 'hidden' on popup div
-function toggleHideClass() {
-  const popup = document.querySelector(".delete-user-confirm");
-  console.log(popup);
-  popup.classList.toggle("popup-hidden");
-}
-// Add event listener to the delete icon
-popupHide.addEventListener("click", toggleHideClass);
+// Get all popups
+let popups = document.querySelectorAll(".delete-user-confirm");
+
+
+// Add event listener to each open popup button
+openPopupButtons.forEach(function (button, index) {
+  button.addEventListener("click", function () {
+    // Check if the corresponding popup exists
+    if (popups[index]) {
+      // Toggle the "popup-hidden" of the correspond popup
+      popups[index].classList.toggle("popup-hidden");
+    }
+  });
+});
+
+// Get all close popup buttons
+const closePopupButtons = document.querySelectorAll(".cancel-button");
+
+// Add event listener to each close popup
+closePopupButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    const popup = button.closest(".delete-user-confirm");
+    popup.classList.toggle("popup-hidden");
+  });
+});
