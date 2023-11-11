@@ -11,40 +11,41 @@
     <div class="content">
         <div class="searchSection">
             <div class="searchbytext">
-            <form method="POST" action="/searchData">
-                <input type="text" name="searchInput" placeholder="Enter your search term">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-        <div class="filterbygenre">
-        <form method="POST" action="/filter">
-            <input type="checkbox" name="filter" value="FPS"> FPS<br>
-            <input type="checkbox" name="filter" value="Multiplayer"> Multiplayer<br>
-            <input type="checkbox" name="filter" value="Single"> Single<br>
-            <input type="submit" value="Filter" style="display: none;">
-        </form>
-    </div>
-    </div>
-        <table class="cart">
-            <div class="gameshower">
-            {% for product in table %}
-            <div class="product-item-vertical">
-                <img src="{{product[11]}}" alt="{{product[11]}}">
-                <div class="flexing">
-                    <h2>{{ product[1] }}</h2>
-                </div>
-                <div class="flexing2">
-                    <h3>{{product[7]}}</h3>
-                </div>
-                <form action="/cart/add" method="POST">
-                    <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
-
+                <form method="POST" action="/searchData">
+                    <input type="text" name="searchInput" placeholder="Enter your search term">
+                    <button type="submit">Search</button>
                 </form>
             </div>
-            {% endfor %}
+            <div class="filterbygenre">
+                <form method="POST" action="/filter">
+                    <input type="checkbox" name="filter" value="FPS">
+                    <span>FPS</span>
+                    <input type="checkbox" name="filter" value="Multiplayer">
+                    <span>Multiplayer</span><br>
+                    <input type="checkbox" name="filter" value="Single">
+                    <span>Single</span><br>
+                    <input type="submit" value="Filter" style="display: none;">
+                </form>
+            </div>
         </div>
+        <table class="cart">
+            <div class="gameshower">
+                {% for product in table %}
+                <div class="product-item-vertical">
+                    <img src="{{product[11]}}" alt="{{product[11]}}">
+                    <div class="flexing">
+                        <h2>{{ product[1] }}</h2>
+                    </div>
+                    <div class="flexing2">
+                        <h3>{{product[7]}}</h3>
+                    </div>
+                    <form action="/cart/add" method="POST">
+                        <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
         </table>
-    
         {% if search_text and output_message %}
         <p>{{ output_message }}</p>
         {% endif %}
