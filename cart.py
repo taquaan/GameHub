@@ -21,7 +21,7 @@ def home():
 def index():
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
-    cursor.execute("Select * from mytable")
+    cursor.execute("Select * from mytable;")
     data = cursor.fetchall()
     conn.close()
     return render_template(
@@ -31,11 +31,11 @@ def index():
 
 
 #Search func
+# Search func
 @app.route('/searchData', methods=['POST'])
 def searchData():
     search_text = request.form['searchInput']
-    html_table,output_message = load_data_from_db(search_text)
-    print(html_table)
+    html_table, output_message = load_data_from_db(search_text)
     return render_template(
         'Searching.html',
         search_text=search_text,
@@ -44,6 +44,37 @@ def searchData():
     )
 
 
+# Filter func
+@app.route('/filter', methods=['POST'])
+def filterData():
+    filter_values = request.form.getlist('filter')
+    html_table, output_message = load_filtered_data_from_db(filter_values)
+    print(filter_values)
+    return render_template(
+        'Searching.html',
+        table=html_table,
+        output_message=output_message
+    )
+
+
+# loaddatatudb with filter
+def load_filtered_data_from_db(search_text):
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    sqlcommand = ("SELECT * FROM mytable "
+                  "WHERE Tags LIKE ? "
+                  "OR Publisher LIKE ?")
+    search_text = search_text[0]  # Assuming search_text is a list with a single element
+    cursor.execute(sqlcommand, ('%' + search_text + '%', '%' + search_text + '%'))
+    data = cursor.fetchall()
+    conn.close()
+    if len(data) == 0:
+        output_message = "No Matching Games Found"
+        return data, output_message
+    else:
+        return data, None
+    
+
 #loaddatatudb
 def load_data_from_db(search_text):
     if search_text != "":
@@ -51,8 +82,9 @@ def load_data_from_db(search_text):
         cursor = conn.cursor()
         sqlcommand = ("Select * from mytable "
                       "where Name like '%")+search_text+"%'"
-        sqlcommand = sqlcommand + ("or Name like '%")+search_text+"%'"
+        sqlcommand = sqlcommand + ("or Tags like '%")+search_text+"%'"
         cursor.execute(sqlcommand)
+
         data = cursor.fetchall()
         conn.close()
         if len(data) == 0: #vong lap check game ton tai
