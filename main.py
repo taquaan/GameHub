@@ -102,15 +102,32 @@ def load_data_from_user(username):
       no_user_message = "No user name '" + username + "'"
       return data, no_user_message
     else:
-      return data
+      return data, None
   
-# Load admin page
+# admin page
 @app.route("/admin")
 def admin():
   logged_in = session.get('logged_in', False)
   return render_template("admin.html")
 
+# admin search user funtion
+@app.route("/searchUser", methods=['POST'])
+def searchUser():
+  search_user = request.form['SearchUser']
+  user_table, output_message = load_data_from_user(search_user)
+  return render_template("admin.html", search_user=search_user,
+        table=user_table,
+        output_message=output_message if search_user else None
+        )
 
+# Delete User from UserDB
+# def delete_user_from_db(user_id){
+#   if user_id != "":
+#     # Trỏ tới UserDB
+#     conn = sqlite3.connect(sqldbuser);
+#     cursor = conn.cursor();
+#     sqlcommand = ("delete from users where id = " + user_id);
+# }
 
 if __name__ == '__main__':
   app.run(debug=True)

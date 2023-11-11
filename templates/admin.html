@@ -54,14 +54,18 @@
         <h1>Manage User</h1>
         <div class="search-bar">
           <span class="fa-solid fa-search fa-xl"></span>
-          <input
-            type="text"
-            placeholder="Search for User"
-            class="search-input"
-          />
+          <form method="POST" action="/searchUser">
+            <input
+              type="text"
+              placeholder="Enter username"
+              class="search-input"
+              name="SearchUser"
+            />
+          </form>
         </div>
         <div class="user-search-flex">
           <div class="users-container">
+            {% for user in table %}
             <div class="user-holder">
               <img
                 src="static/img/default-avatar.jpg"
@@ -71,7 +75,7 @@
               <div class="user-grid-holder">
                 <div class="user-info">
                   <h5 class="user-country">Vietnam</h5>
-                  <h2 class="username">Kim Jong Un</h2>
+                  <h2 class="username">{{ user[1] }}</h2>
                   <div class="user-status">
                     <div class="user-online"></div>
                     <h6>Not currently online</h6>
@@ -82,7 +86,7 @@
                     <div class="fix-icon">
                       <i class="fa-regular fa-wrench fa-lg"></i>
                     </div>
-                    <div class="delete-icon">
+                    <div class="delete-icon" user-id="{{ user[0] }}">
                       <i class="fa fa-times fa-xl" aria-hidden="true"></i>
                     </div>
                   </div>
@@ -90,21 +94,36 @@
                     <div class="stats-flex">
                       <div class="total total-games">
                         <h5>Games</h5>
-                        <h1>20</h1>
+                        <h1>{{ user[4] }}</h1>
                       </div>
                       <div class="total total-badges">
                         <h5>Badges</h5>
-                        <h1>12</h1>
+                        <h1>{{ user[5] }}</h1>
                       </div>
                       <div class="total total-friends">
                         <h5>Friends</h5>
-                        <h1>17</h1>
+                        <h1>{{ user[6] }}</h1>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="delete-user-confirm popup-hidden">
+                <div class="popup">
+                  <div class="content">
+                    <h4>
+                      Do you sure you want to delete<br />user "username"?
+                    </h4>
+                    <div class="button-holder">
+                      <button class="delete-button button">Delete</button>
+                      <button class="cancel-button button">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <script src="static/js/admin.js"></script>
             </div>
+            {% endfor %}
           </div>
         </div>
       </div>
