@@ -12,7 +12,7 @@
         <div class="searchSection">
             <div class="searchbytext">
                 <form method="POST" action="/searchData">
-                    <input type="text" name="searchInput" placeholder="Enter your search term">
+                    <input type="text" name="searchInput" placeholder="   Enter your search term">
                     <button type="submit" style="display: none;">Search</button>
                 </form>
             </div>
@@ -21,13 +21,22 @@
                     <div class="field"> <input type="checkbox" name="filter" value="FPS">
                         <span>FPS</span>
                     </div>
+                    <div class="field"> <input type="checkbox" name="filter" value="Adventure">
+                        <span>Adventure</span>
+                    </div>
+                    <div class="field"> <input type="checkbox" name="filter" value="Horror">
+                        <span>Horror</span>
+                    </div>
+                    <div class="field"> <input type="checkbox" name="filter" value="Survival">
+                        <span>Survival</span>
+                    </div>
+                    <div class="field"> <input type="checkbox" name="filter" value="PvP">
+                        <span>PvP</span>
+                    </div>
                     <div class="field"> <input type="checkbox" name="filter" value="Multiplayer">
-                        <span>Multiplayer</span><br>
+                        <span>Multiplayer</span>
                     </div>
-                    <div class="field"> <input type="checkbox" name="filter" value="Single">
-                        <span>Single</span><br>
-                    </div>
-                    <button type="submit" value="Filter">Filter></button>
+                    <button type="submit" value="Filter">Filter</button>
                 </form>
             </div>
         </div>
