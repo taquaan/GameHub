@@ -109,48 +109,48 @@
                     </div>
                   </div>
                 </div>
-                <div class="delete-user-confirm popup-hidden">
-                  <div class="popup">
-                    <div class="content">
-                      <h4>
-                        Do you sure you want to delete<br />user "{{ user[1] }}"?
-                      </h4>
-                      <div class="button-holder">
-                        <form method="POST" action="/deleteUser">
-                          <input
-                            type="hidden"
-                            id="user-id-input"
-                            name="user_id"
-                            value="{{ user[0] }}"
-                          />
-                          <button class="delete-button button">Delete</button>
-                        </form>
-                        <button class="cancel-button button">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                  {% endif %} {% if delete_success %}
-                  <div class="remove-user-successful-popup">
-                    <div class="remove-successful">
-                      <div class="flex-container">
-                        <img
-                          src="static/img/full-logo-vertical.svg"
-                          alt="GameHub logo"
-                        />
-                        <h2>Delete User Successful!</h2>
-                      </div>
-                    </div>
-                    <script>
-                      setTimeout(function () {
-                        window.location.href = "/admin";
-                      }, 1600); // Redirect to admin page after 2.7 second delay
-                    </script>
-                  </div>
-                  {% endif %}
-                </div>
-                <script src="static/js/admin.js"></script>
               </div>
+              <div class="delete-user-confirm popup-hidden">
+                <div class="popup">
+                  <div class="content">
+                    <h4>
+                      Do you sure you want to delete<br />user "{{ user[1] }}"?
+                    </h4>
+                    <div class="button-holder">
+                      <form method="POST" action="/deleteUser">
+                        <input
+                          type="hidden"
+                          id="user-id-input"
+                          name="user_id"
+                          value="{{ user[0] }}"
+                        />
+                        <button class="delete-button button">Delete</button>
+                      </form>
+                      <button class="cancel-button button">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %} {% if delete_success %}
+              <div class="remove-user-successful-popup">
+                <div class="remove-successful">
+                  <div class="flex-container">
+                    <img
+                      src="static/img/full-logo-vertical.svg"
+                      alt="GameHub logo"
+                    />
+                    <h2>Delete User Successful!</h2>
+                  </div>
+                </div>
+                <script>
+                  setTimeout(function () {
+                    window.location.href = "/admin";
+                  }, 2700); // Redirect to admin page after 2.7 second delay
+                </script>
+              </div>
+              {% endif %}
+              <script src="static/js/admin.js"></script>
             </div>
           </div>
         </div>
