@@ -93,16 +93,21 @@ def load_data_from_user(username):
     # Trỏ tới UserDB
     conn = sqlite3.connect(sqldbuser)
     cursor = conn.cursor()
-    sqlcommand = ("Select * from users where username like '%" + username + "%'")
+    sqlcommand = ("Select * from users where username like '%" + username + "%' or username like '%" + username + "%'")
     cursor.execute(sqlcommand)
     data = cursor.fetchall()
     conn.close()
-    return data
+    # Kiểm tra xem user có tồn tại không và trả lại dữ liệu
+    if len(data) == 0:
+      no_user_message = "No user name '" + username + "'"
+      return data, no_user_message
+    else:
+      return data
   
 # Load admin page
 @app.route("/admin")
 def admin():
-  session['logged_in'] = True
+  logged_in = session.get('logged_in', False)
   return render_template("admin.html")
 
 
