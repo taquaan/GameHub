@@ -113,21 +113,35 @@ def admin():
 # admin search user funtion
 @app.route("/searchUser", methods=['POST'])
 def searchUser():
+  delete_success = False
   search_user = request.form['SearchUser']
   user_table, output_message = load_data_from_user(search_user)
-  return render_template("admin.html", search_user=search_user,
+  return render_template("admin.html", delete_success=delete_success, 
+        search_user=search_user,
         table=user_table,
         output_message=output_message if search_user else None
         )
 
 # Delete User from UserDB
-# def delete_user_from_db(user_id){
-#   if user_id != "":
-#     # Trỏ tới UserDB
-#     conn = sqlite3.connect(sqldbuser);
-#     cursor = conn.cursor();
-#     sqlcommand = ("delete from users where id = " + user_id);
-# }
+def delete_user_from_db(user_id):
+  if user_id != "":
+    # Trỏ tới UserDB
+    conn = sqlite3.connect(sqldbuser)
+    cursor = conn.cursor()
+    sqlcommand = ("delete from users where id = " + user_id)
+    cursor.execute(sqlcommand)
+    data = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return "User deleted successfully"
+
+# Load page delete user
+@app.route('/deleteUser', methods=['POST'])
+def delete_user():
+  user_id = request.form['user_id']
+  delete_result = delete_user_from_db(user_id)
+  delete_success = True
+  return render_template("admin.html", delete_success = delete_success)
 
 if __name__ == '__main__':
   app.run(debug=True)
