@@ -22,11 +22,11 @@
       <p class="directory">
         <span class="directory-text">All Games</span>
         <span class="directory-text-2">></span>
-        <span class="directory-text">Adventure Games</span>
+        <span class="directory-text">{{ genre }} Games</span>
         <span class="directory-text-2">></span>
-        <span class="directory-text">Cognosphere LTD.</span>
+        <span class="directory-text">{{ publisher }}</span>
         <span class="directory-text-2">></span>
-        <span class="directory-text">Ghenshin Impact</span>
+        <span class="directory-text">{{ game_title }}</span>
       </p>
       <div class="content">
         <!--Left column-->
@@ -203,7 +203,7 @@
               <p>Text: <span id="text-placeholder" class="inline"></span></p>
             </div>
             <div class="otherspecs divider"></div>
-            <div class="otherspecs title copyright"><div id="copyright-placeholder"></div></div>
+            <div class="otherspecs title copyright"><div id="copyright-placeholder"></div><p>Privacy Policy</p></div>
           </section>
           <section id="recommendations" class="description">
             <div class="section-title">More like this</div>
@@ -221,19 +221,13 @@
             <div class="review">
               <div class="overall-rating">
                 <div class="rating_stars">
-                  <div class="rating">4.7</div>
-                    <div class="stars">
-                      <i class="fa-solid fa-star-sharp"></i>
-                      <i class="fa-solid fa-star-sharp"></i>
-                      <i class="fa-solid fa-star-sharp"></i>
-                      <i class="fa-solid fa-star-sharp"></i>
-                      <i class="fa-regular fa-star-sharp-half-stroke"></i>
-                    </div>
+                  <div class="rating"><div id="score-placeholder"></div></div>
+                    <div class="stars"><div class="rating-container"></div></div>
                 </div>
                 <div class="overall-review">
                   <div class="title">OVERALL REVIEW</div>
                   <div class="status">
-                    <div class="div">Overwhelmingly Positive</div>
+                    <div class="div"><div class="overall-review-placeholder"></div></div>
                     <div class="count">(696,969 reviews)</div>
                   </div>
                 </div>
@@ -304,12 +298,8 @@
           <div class="game-info">
             <div class="game-name"><div id="game-title-placeholder"></div></div>
             <div class="rating">
-              <i class="fa fa-star-sharp"></i>
-              <i class="fa fa-star-sharp"></i>
-              <i class="fa fa-star-sharp"></i>
-              <i class="fa fa-star-sharp"></i>
-              <i class="fa-regular fa-star-sharp-half-stroke"></i>
-              <div class="overall-rating">Overwhelmingly Positive</div>
+              <div class="rating-container"></div>
+              <div class="overall-rating"><div class="overall-review-placeholder"></div></div>
             </div>
             <div class="price" id="price-container">
               <div class="discount-per" id="discount-per-container"></div>
@@ -388,32 +378,23 @@
             </div>
           </div>
           <div id="tags" class="game-info">
-            <div class="tags">
-              <p>Fantasy</p> <p>RPG</p> <p>Open World</p>
-            </div>
+            <div id="tagsContainer" class="tags"></div>
           </div>
           <div id="esrb" class="game-info">
-            <div class="esrb">
-              <div class="esrb-icon"><img src="./static/img/esrb/E.svg" alt="" /></div>
-              <div class="esrb-content">
-                <b>Everyone</b>
-                <p>Alcohol Reference, Fantasy Violence</p>
-                <div class="divider"></div>
-                <p>Users Interact, In-Game Purchases (Includes Random Items)</p>
-              </div>
-            </div>
+            <div id="esrbContainer" class="esrb"></div>
           </div>
           <div id="features" class="game-info">
             <div class="features">
               <p>Features</p>
               <div class="feature-tabs">
-                <div class="tab"><i class="fa-solid fa-user"></i>Singleplayer</div>
-                <div class="tab"><i class="fa-solid fa-users"></i>Online Multiplayer</div>
-                <div class="tab"><i class="fa-solid fa-user-group-simple"></i>Online Co-Op</div>
-                <div class="tab"><i class="fa-solid fa-gamepad-modern"></i>Controller Support</div>
-                <div class="tab"><i class="fa-solid fa-cloud"></i>Online Saves</div>
-                <div class="tab"><i class="fa-solid fa-trophy"></i>Achievements</div>
-                <div class="notice">Requires 3rd Party Login: HoYoverse Account</div>
+                <div id="Singleplayer" class="tab"><i class="fa-solid fa-user"></i>Singleplayer</div>
+                <div id="Multiplayer" class="tab"><i class="fa-solid fa-users"></i>Online Multiplayer</div>
+                <div id="Online Co-Op" class="tab"><i class="fa-solid fa-user-group-simple"></i>Online Co-Op</div>
+                <div id="Online PvP" class="tab"><i class="fa-duotone fa-user-group"></i>Online PvP</div>
+                <div id="Controller" class="tab"><i class="fa-solid fa-gamepad-modern"></i>Controller Support</div>
+                <div id="Online Saves" class="tab"><i class="fa-solid fa-cloud"></i>Online Saves</div>
+                <div id="Achievements" class="tab"><i class="fa-solid fa-trophy"></i>Achievements</div>
+                <div class="notice"><div id="feature-notice-placeholder"></div></div>
               </div>
             </div>
           </div>

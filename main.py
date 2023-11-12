@@ -28,47 +28,45 @@ def generate_order_id():
     # Generate a UUID and remove dashes to create a custom order ID
     return str(uuid.uuid4()).replace('-', '')
 
-#khoi tao search func
+# SEARCH FUNCTION
 @app.route('/Search')
-def index():
+def search():
     conn = sqlite3.connect(sqldbgame)
     cursor = conn.cursor()
-    cursor.execute("Select * from GameDB;")
+    cursor.execute("Select * from GameDB")
     data = cursor.fetchall()
     conn.close()
     return render_template(
-        'Searching.html', table=data
+        'search.html', table=data
     )
 
-
-
-# Search func
+# SEARCH FUNCTION WITH DATA
 @app.route('/searchData', methods=['POST'])
 def searchData():
     search_text = request.form['searchInput']
     html_table, output_message = load_data_from_db(search_text)
     return render_template(
-        'Searching.html',
+        'search.html',
         search_text=search_text,
         table=html_table,
         output_message=output_message if search_text else None
     )
 
 
-# Filter func
+# FILTER FUNCTION
 @app.route('/filter', methods=['POST'])
 def filterData():
     filter_values = request.form.getlist('filter')
     html_table, output_message = load_filtered_data_from_db(filter_values)
     print(filter_values)
     return render_template(
-        'Searching.html',
+        'search.html',
         table=html_table,
         output_message=output_message
     )
 
 
-# loaddatatudb with filter
+# LOAD DATA FROM DB WITH FILTER
 def load_filtered_data_from_db(search_text):
     conn = sqlite3.connect(sqldbgame)
     cursor = conn.cursor()
@@ -220,7 +218,7 @@ def product_page(GameID):
         'trailer': thumbnails[5],
         'trailer_thumb': thumbnails[6],
       }
-    cursor.execute('SELECT GameTitle, DiscountPer, OldPrice, NewPrice, SupportedOS, InAppPur FROM GameDB WHERE GameID = ?', (GameID,))
+    cursor.execute('SELECT GameTitle, DiscountPer, OldPrice, NewPrice, SupportedOS, InAppPur, Genre, Publisher FROM GameDB WHERE GameID = ?', (GameID,))
     data = cursor.fetchone()
     if data:
       game_info_2 = {
@@ -230,6 +228,8 @@ def product_page(GameID):
         'new_price': data[3],
         'supported_os': data[4],
         'in_app': data[5],
+        'genre': data[6],
+        'publisher': data[7],
       }
       game_info = {**game_info, **game_info_2}
     return render_template(
@@ -242,11 +242,12 @@ def get_game_info(GameID):
     # Basic Game Info
     conn = sqlite3.connect(sqldbgame)
     cursor = conn.cursor()
-    cursor.execute('SELECT GameTitle, Cover, Description, DiscountPer, OldPrice, NewPrice, InAppPur, Developer, Publisher, ReleaseDate, SupportedOS, Tags, UpdateLogs FROM GameDB WHERE GameID = ?', (GameID,))
+    cursor.execute('SELECT GameTitle, Cover, Description, DiscountPer, OldPrice, NewPrice, InAppPur, Developer, Publisher, ReleaseDate, SupportedOS, Tags, UpdateLogs, OverallReview, OverallReviewText, ESRBLabel, ESRBContent, ESRBInteract, Features, FeatureNotice, Genre FROM GameDB WHERE GameID = ?', (GameID,))
     data = cursor.fetchone()
     if data:
       game_info = {
         'game_title': data[0],
+        'genre': data[20],
         'cover_art': data[1],
         'description': data[2],
         'discount': data[3],
@@ -259,6 +260,13 @@ def get_game_info(GameID):
         'supported_os': data[10],
         'tags': data[11],
         'update_logs': data[12],
+        'review_score': data[13],
+        'review_text': data[14],
+        'esrb': data[15],
+        'esrb_content': data[16],
+        'esrb_interact': data[17],
+        'features': data[18],
+        'feature_notice': data[19],
       }
       if game_info['new_price'] == 0:
         game_info['new_price'] = 'Free'
@@ -300,7 +308,9 @@ def get_game_info(GameID):
           system_requirements['LanguageAudio'] = result[0]
           system_requirements['LanguageText'] = result[1]
           system_requirements['Copyright'] = result[2]
+
     conn.close()
+
     return jsonify(game_info, system_requirements)
 
 # INSTANT BUY FUNCTION

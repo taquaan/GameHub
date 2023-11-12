@@ -535,7 +535,7 @@ form {
 }
 
 .feature-tabs .tab{
-    display: flex;
+    display: none;
     padding: 15px 20px 15px 10px;
     align-items: center;
     align-self: stretch;
@@ -554,12 +554,13 @@ form {
 }
 
 .feature-tabs .notice{
-    display: flex;
+    display: none;
     padding: 15px 20px 15px 20px;
     align-items: center;
     align-self: stretch;
     background-color: #ebad1050;
     color:#b8b8b8;
+    font-size: 18px;
     border-radius: 10px;
     vertical-align: middle;
 }
