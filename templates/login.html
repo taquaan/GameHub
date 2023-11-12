@@ -30,8 +30,11 @@
             <form
               class="user-input-section"
               method="POST"
-              action="{{ url_for('login')}}"
+              action="{{ url_for('login') }}"
             >
+              {% if error %}
+              <div class="notice">Invalid username or password</div>
+              {% endif %}
               <input
                 type="text"
                 class="user-input username"

@@ -16,20 +16,25 @@
       <div class="sign-in-flex-container">
         <div class="sign-in-section">
           <div class="logo-holder">
-            <img
-              src="./static/img/full-logo-vertical.svg"
-              alt="GameHub logo"
-              class="logo"
-            />
+            <a href="{{ url_for('index') }}">
+              <img
+                src="./static/img/full-logo-vertical.svg"
+                alt="GameHub logo"
+                class="logo"
+                href=""
+              />
+            </a>
           </div>
           <h3 class="title">Sign up</h3>
           <div class="user-input-holder">
             <form
               class="user-input-section"
               method="POST"
-              action="http://127.0.0.1:5000/register"
-              action="http://127.0.0.1:5000/register"
+              action="{{ url_for('register') }}"
             >
+              {% if success == False %}
+              <div class="notice">{{error}}</div>
+              {% endif %}
               <input
                 type="text"
                 class="user-input username"
@@ -39,7 +44,7 @@
               />
               <br />
               <input
-                type="text"
+                type="email"
                 class="user-input email"
                 name="email"
                 placeholder="Email Adress"
@@ -94,22 +99,6 @@
         <script>
           setTimeout(function () {
             window.location.href = "/";
-          }, 2700); // Redirect to main page after 2.7 second delay
-        </script>
-        {% elif success == False %}
-        <div class="successful-noti">
-          <div class="logo-holder">
-            <img
-              src="./static/img/full-logo-vertical.svg"
-              alt="GameHub logo"
-              class="logo"
-            />
-          </div>
-          <h3 class="noti">{{error}}</h3>
-        </div>
-        <script>
-          setTimeout(function () {
-            window.location.href = "/register";
           }, 2700); // Redirect to main page after 2.7 second delay
         </script>
         {% endif %}

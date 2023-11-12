@@ -108,21 +108,24 @@ def load_data_from_db(search_text):
 # LOGIN FUNCTION
 @app.route("/login", methods=["GET","POST"])
 def login():
-  if request.method == 'POST':
-    username = request.form["username"]
-    password = request.form["password"]
-    if check_exists(username,password):
-      session['username'] = username
-      session['logged_in'] = True
-      # Redirect back to the stored URL or a default page
-      next_url = session.pop('next_url', None)
-      # Redirect to the next URL or a default page
-      if next_url:
-        return redirect(next_url)
-      else:
-        return redirect(url_for('index'))
-  session['next_url'] = request.referrer
-  return render_template('login.html')
+    error = False
+    if request.method == 'POST':
+        session['next_url'] = request.referrer
+        username = request.form["username"]
+        password = request.form["password"]
+        if check_exists(username, password):
+            session['username'] = username
+            session['logged_in'] = True
+            # Redirect back to the stored URL or a default page
+            next_url = session.pop('next_url', None)
+            # Redirect to the next URL or a default page
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect(url_for('index'))
+        else:
+            error = True
+    return render_template('login.html', error=error)
 
 # Check if the input data is correct
 def check_exists(username, password):
@@ -141,8 +144,14 @@ def check_exists(username, password):
 # LOGOUT FUNCTION
 @app.route("/logout")
 def logout():
-    session['logged_in'] = False
-    return render_template('login.html') 
+  session['logged_in'] = False
+  session['next_url'] = request.referrer
+  next_url = session.pop('next_url', None)
+  # Redirect to the next URL or a default page
+  if next_url:
+    return redirect(next_url)
+  else:
+    return redirect(url_for('index'))
 
 # REGISTER FUNCTION
 #Create the ID for a new user
