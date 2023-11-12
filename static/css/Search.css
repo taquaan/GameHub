@@ -1,9 +1,15 @@
 @import "styles.css";
+@import "header.css";
+@import "footer.css";
+@import "font-awesome.min.css";
 
-body {
+main{
   display: flex;
   justify-content: center;
   background-color: #121212;
+  width: 100%;
+  height:100%;
+  justify-content: center;
   color: white;
 }
 .content {

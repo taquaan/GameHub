@@ -10,7 +10,7 @@
     <div class="user">
       <div class="nav-button">
           <label class="button searchbutton"><span class="fa-solid fa-search"></span></label>
-          {% if session['logged_in'] %}
+          {% if session['logged_in'] or logged_in %}
           <label class="button notibutton"><span class="fa-solid fa-bell"></span></label>
           <label class="button cartbutton"><span class="fa-solid fa-shopping-basket"></span></label>
           <div class="avatar-holder">

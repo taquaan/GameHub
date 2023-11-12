@@ -3,6 +3,7 @@ import sqlite3
 
 app = Flask(__name__)
 sqldbuser = 'db/userData.db'
+sqldbname = "db/data.sqlite"
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 
 @app.route("/")
@@ -142,6 +143,20 @@ def delete_user():
   delete_result = delete_user_from_db(user_id)
   delete_success = True
   return render_template("admin.html", delete_success = delete_success)
+
+# FUNCTION FOR SEARCHING PAGE
+#khoi tao search func
+@app.route('/Search')
+def search():
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute("Select * from mytable;")
+    data = cursor.fetchall()
+    conn.close()
+    logged_in = session.get('logged_in', False)
+    return render_template(
+        'Searching.html', table=data, logged_in=logged_in
+    )
 
 if __name__ == '__main__':
   app.run(debug=True)
