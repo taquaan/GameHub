@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="static/css/Search.css">
+<meta charset="UTF-8">
+
+<head>
+
+</head>
+
+<body>
+    {% include '_header.html' %}
+    <main>
+        <div class="content">
+            <div class="searchSection">
+                <div class="searchbytext">
+                    <form method="POST" action="/searchData">
+                        <input type="text" name="searchInput" placeholder="   Enter your search term">
+                        <button type="submit" style="display: none;">Search</button>
+                    </form>
+                </div>
+                <div class="filterbygenre">
+                    <form method="POST" action="/filter">
+                        <div class="field"> <input type="checkbox" name="filter" value="FPS">
+                            <span>FPS</span>
+                        </div>
+                        <div class="field"> <input type="checkbox" name="filter" value="Adventure">
+                            <span>Adventure</span>
+                        </div>
+                        <div class="field"> <input type="checkbox" name="filter" value="Horror">
+                            <span>Horror</span>
+                        </div>
+                        <div class="field"> <input type="checkbox" name="filter" value="Survival">
+                            <span>Survival</span>
+                        </div>
+                        <div class="field"> <input type="checkbox" name="filter" value="PvP">
+                            <span>PvP</span>
+                        </div>
+                        <div class="field"> <input type="checkbox" name="filter" value="Multiplayer">
+                            <span>Multiplayer</span>
+                        </div>
+                        <button type="submit" value="Filter">Filter</button>
+                    </form>
+                </div>
+            </div>
+            <table class="cart">
+                <div class="gameshower">
+                    {% for product in table %}
+                    <div class="product-item-vertical">
+                        <img src="{{product[11]}}" alt="{{product[11]}}">
+                        <div class="flexing">
+                            <h2>{{ product[1] }}</h2>
+                        </div>
+                        <div class="flexing2">
+                            <h3>{{product[7]}}</h3>
+                        </div>
+                        <form action="/cart/add" method="POST">
+                            <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </table>
+            {% if search_text and output_message %}
+            <p>{{ output_message }}</p>
+            {% endif %}
+        </div>    
+    </main>
+    {% include '_footer.html' %}
+</body>
+
+</html>

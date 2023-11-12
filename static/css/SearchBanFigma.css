@@ -1,0 +1,115 @@
+@import "styles.css";
+@import "header.css";
+@import "footer.css";
+@import "font-awesome.min.css";
+
+main{
+  display: flex;
+  justify-content: center;
+  background-color: #121212;
+  width: 100%;
+  height:100%;
+  justify-content: center;
+  color: white;
+}
+.content {
+  width: 85%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.searchSection {
+  width: 30%;
+  height: 80%;
+  margin: 50px;
+}
+.searchbytext input {
+  height: 60px;
+  width: 100%;
+  font-size: 20px;
+  border: none;
+  display: flex;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.102);
+}
+.product-item-vertical {
+  display: flex;
+  margin: 40px;
+  background-color: #00000033;
+  border-radius: 30px;
+  font-size: 20px;
+}
+.flexing2 {
+  display: flex;
+  max-width: 20%;
+  justify-content: center;
+  align-items: center;
+}
+.product-item-vertical .flexing2 {
+  margin-right: 50px;
+}
+.product-item-vertical img {
+  min-width: 400px;
+  max-width: 400px;
+  margin-right: 50px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.product-item-vertical .flexing {
+  display: flex;
+  align-items: center;
+  width: 60%;
+}
+.gameshower {
+  display: flex;
+  flex-direction: column;
+}
+.searchSection .filterbygenre {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 500px;
+  margin-top: 40px;
+  background-color: #00000033;
+  border-radius: 20px;
+}
+.filterbygenre input {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.searchSection .field {
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+}
+.field span {
+  margin-left: 15px;
+  font-size: 20px;
+}
+.searchSection button {
+  margin-top: 20px;
+  margin-left: 15px;
+  width: 120px;
+  height: 40px;
+  background-color: orange;
+  border-radius: 10px;
+  border: none;
+}
+
+.product-item-vertical form button {
+  background-color: orange;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-item-vertical form button:hover {
+  background-color: #2980b9;
+}

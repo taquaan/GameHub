@@ -28,29 +28,63 @@ def generate_order_id():
     # Generate a UUID and remove dashes to create a custom order ID
     return str(uuid.uuid4()).replace('-', '')
 
-# SEARCH FUNCTION
-@app.route('/search')
-def search():
+#khoi tao search func
+@app.route('/Search')
+def index():
     conn = sqlite3.connect(sqldbgame)
     cursor = conn.cursor()
-    cursor.execute("Select * from GameDB")
+    cursor.execute("Select * from GameDB;")
     data = cursor.fetchall()
     conn.close()
     return render_template(
-        'search.html', table=data,
+        'Searching.html', table=data
     )
 
-# SEARCH WITH DATA
+
+
+# Search func
 @app.route('/searchData', methods=['POST'])
 def searchData():
     search_text = request.form['searchInput']
-    html_table,output_message = load_data_from_db(search_text)
+    html_table, output_message = load_data_from_db(search_text)
     return render_template(
-        'search.html',
+        'Searching.html',
         search_text=search_text,
         table=html_table,
         output_message=output_message if search_text else None
     )
+
+
+# Filter func
+@app.route('/filter', methods=['POST'])
+def filterData():
+    filter_values = request.form.getlist('filter')
+    html_table, output_message = load_filtered_data_from_db(filter_values)
+    print(filter_values)
+    return render_template(
+        'Searching.html',
+        table=html_table,
+        output_message=output_message
+    )
+
+
+# loaddatatudb with filter
+def load_filtered_data_from_db(search_text):
+    conn = sqlite3.connect(sqldbgame)
+    cursor = conn.cursor()
+    sqlcommand = ("SELECT * FROM GameDB "
+                  "WHERE Tags LIKE ? "
+                  "OR Publisher LIKE ?")
+    search_text = search_text[0]  # Assuming search_text is a list with a single element
+    cursor.execute(sqlcommand, ('%' + search_text + '%', '%' + search_text + '%'))
+    data = cursor.fetchall()
+    conn.close()
+    if len(data) == 0:
+        output_message = "No Matching Games Found"
+        return data, output_message
+    else:
+        return data, None
+    
 
 # LOAD DATA FROM DB
 def load_data_from_db(search_text):
@@ -658,6 +692,63 @@ def save_order(user_id, order_uuid, total_price, cart):
         conn.commit()
         conn.close()
     return order
+# FUNCTION FOR ADMIN PAGE
+# Load data form UserDB
+def load_data_from_user(username):
+  if username != "":
+    # Trỏ tới UserDB
+    conn = sqlite3.connect(sqldbuser)
+    cursor = conn.cursor()
+    sqlcommand = ("Select * from users where username like '%" + username + "%' or username like '%" + username + "%'")
+    cursor.execute(sqlcommand)
+    data = cursor.fetchall()
+    conn.close()
+    # Kiểm tra xem user có tồn tại không và trả lại dữ liệu
+    if len(data) == 0:
+      no_user_message = "No user name '" + username + "'"
+      return data, no_user_message
+    else:
+      return data, None
+  
+# admin page
+@app.route("/admin")
+def admin():
+  logged_in = session.get('logged_in', False)
+  return render_template("admin.html")
+
+# admin search user funtion
+@app.route("/searchUser", methods=['POST'])
+def searchUser():
+  delete_success = False
+  search_user = request.form['SearchUser']
+  user_table, output_message = load_data_from_user(search_user)
+  return render_template("admin.html", delete_success=delete_success, 
+        search_user=search_user,
+        table=user_table,
+        output_message=output_message if search_user else None
+        )
+
+# Delete User from UserDB
+def delete_user_from_db(user_id):
+  if user_id != "":
+    # Trỏ tới UserDB
+    conn = sqlite3.connect(sqldbuser)
+    cursor = conn.cursor()
+    sqlcommand = ("delete from users where id = " + user_id)
+    cursor.execute(sqlcommand)
+    data = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return "User deleted successfully"
+
+# Load page delete user
+@app.route('/deleteUser', methods=['POST'])
+def delete_user():
+  user_id = request.form['user_id']
+  delete_result = delete_user_from_db(user_id)
+  delete_success = True
+  return render_template("admin.html", delete_success = delete_success)
+
 
 if __name__ == '__main__':
   app.run(debug=True)
