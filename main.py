@@ -294,7 +294,7 @@ def buy():
         'discount_per': discount_per,
         'new_price': new_price,
         'in_app': in_app,
-        'quantity': 1,  # You can adjust this as needed
+        'quantity': 1, # You can adjust this as needed
         'game_cover': game_cover,
         'supported_os': supported_os,
     }
