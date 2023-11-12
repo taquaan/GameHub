@@ -114,7 +114,6 @@ main {
 
 .cart-info .game-price .specific{
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     column-gap: 10px;
     row-gap: 5px;
