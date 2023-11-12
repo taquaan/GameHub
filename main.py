@@ -45,13 +45,15 @@ def search():
 def searchData():
     search_text = request.form['searchInput']
     html_table, output_message = load_data_from_db(search_text)
-    return render_template(
-        'search.html',
-        search_text=search_text,
-        table=html_table,
-        output_message=output_message if search_text else None
-    )
-
+    if html_table != None:
+      return render_template(
+          'search.html',
+          search_text=search_text,
+          table=html_table,
+          output_message=output_message if search_text else None
+      )
+    else:
+      return redirect(url_for('search'))
 
 # FILTER FUNCTION
 @app.route('/filter', methods=['POST'])

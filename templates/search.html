@@ -6,82 +6,84 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <header class="header">
-        <div class="nav">
-          <a class="logo" href="{{ url_for('index') }}"><img class="full-logo" src="./static/img/full-logo.svg" /></a>
-          <div class="nav-text">
-            <div class="text-wrapper">Store</div>
-            <div class="text-wrapper">Community</div>
-            <div class="text-wrapper">Support</div>
-          </div>
-        </div>
-        <div class="searchSection">
-            <!-- <form method="POST" action="/view_cart"> -->
-            <!-- <button type="submit">View Cart</button> -->
-            </form>
-            <form method="POST" action="/searchData">
-                <input type="text" name="searchInput" placeholder="Enter your search term">
-                <!-- <button type="submit">Search</button> -->
-            </form>
-            <!-- <p>
-            {% if search_text %}
-            You searched for: {{ search_text }} -->
-        </div>
-    </header>
+    {% include '_header.html' %}
     <main class="content">
-        <div class="page-title">
-            <h1>Your search term: <p>{{search_text}}</p></h1>
-        </div>
-        <table class="cart">
-            <!-- <tr>
-            <th>ID</th>
-            <th>Product</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Price</th>
-            <th>Add to Cart</th>
-        </tr> -->
-            <div class="product-grid">
-                {% for product in table %}
-                <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
-                    <!-- <td>{{ product[1] }}</td> -->
-                    <!-- <td>{{ product[1] }}</td>
-                <td>{{ product[2] }}</td> -->
-                    <img src="{{ product[2]}}">
-                    <h2>{{ product[1] }}</h2>
-                    <div class="price-container">
-                        {% if product[10] != 0 %}
-                        <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
-                        {% endif %}
-                          {% if product[11] != None %}
-                            <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
-                          {% endif %}
-                          {% if product[12] != 0 %}
-                            <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
-                          {% else %}
-                            <div class="new-price">Free</div>
-                          {% endif %}
+        <div class="left-col">
+                <div class="searchSection">
+                    <div class="searchbytext">
+                        <form method="POST" action="/searchData">
+                            <input type="text" name="searchInput" placeholder="Enter your search term">
+                            <button type="submit" style="display: none;">Search</button>
+                        </form>
                     </div>
-                    <!-- <td>{{ product[6] }}</td> -->
-                </a>
-                {% endfor %}
-        </table>
-        {% if search_text and output_message %}
-        <p id="msg">{{ output_message }}</p>
-        {% endif %}
-        {% endif %}
-        </p>
-    </main>
-    <!-- <div class='fillter'>
-        <div class="byPrice">
-            <div class="range-slider">
-                <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
-                <span class="range-slider__value">0</span>
-            </div>
+                    <div class="filterbygenre">
+                        <form method="POST" action="/filter">
+                            <div class="field"> <input type="checkbox" name="filter" value="FPS">
+                                <span>FPS</span>
+                            </div>
+                            <div class="field"> <input type="checkbox" name="filter" value="Adventure">
+                                <span>Adventure</span>
+                            </div>
+                            <div class="field"> <input type="checkbox" name="filter" value="Horror">
+                                <span>Horror</span>
+                            </div>
+                            <div class="field"> <input type="checkbox" name="filter" value="Survival">
+                                <span>Survival</span>
+                            </div>
+                            <div class="field"> <input type="checkbox" name="filter" value="PvP">
+                                <span>PvP</span>
+                            </div>
+                            <div class="field"> <input type="checkbox" name="filter" value="Multiplayer">
+                                <span>Multiplayer</span>
+                            </div>
+                            <button type="submit" value="Filter">Filter</button>
+                        </form>
+                    </div>
+                </div>
         </div>
-        <div class="byGenre"></div>
-        <div class="byLanguage"></div>
-    </div> -->
+        <div class="right-col">
+            <div class="page-title">
+                <h1>Your search term: <p>{{search_text}}</p></h1>
+            </div>
+            <table class="cart">
+                <div class="product-grid">
+                    {% for product in table %}
+                    <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
+                        <img src="{{ product[2] }}">
+                        <h2>{{ product[1] }}</h2>
+                        <div class="supported-os">
+                            {% if 'Windows' in product[17] %}
+                              <div id="supported-os-win"><i class="fa-brands fa-microsoft"></i></div>
+                            {% endif %}
+                            {% if 'macOS' in product[17] %}
+                              <div id="supported-os-mac"><i class="fa-brands fa-apple"></i></div>
+                            {% endif %}
+                            {% if 'Linux' in product[17] %}
+                              <div id="supported-os-linux"><i class="fa-brands fa-linux"></i></div>
+                            {% endif %}
+                        </div>
+                        <div class="price-container">
+                            {% if product[10] != 0 %}
+                            <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
+                            {% endif %}
+                              {% if product[11] != None %}
+                                <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
+                              {% endif %}
+                              {% if product[12] != 0 %}
+                                <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
+                              {% else %}
+                                <div class="new-price">Free</div>
+                              {% endif %}
+                        </div>
+                    </a>
+                    {% endfor %}
+            </table>
+            {% if search_text and output_message %}
+            <p id="msg">{{ output_message }}</p>
+            {% endif %}
+            </p>
+        </div>
+    </main>
 </body>
 
 </html>
