@@ -18,9 +18,13 @@
     </script>
   </head>
   <body>
+    {% if message != None %}
+    <div id="message" class="message-notice">{{message}}</div>
+    {% endif %}
     {% include '_header.html' %}
     <main class="screen">
       <div class="content">
+        {% if wishlist %}
         <div class="page-title">
           <h1>Your Wishlist</h1>
           <div class="wallet">
@@ -55,9 +59,13 @@
                   {% endif %}
                   <div class="specific">
                     {% if item.old_price != None %}
-                      <div class="old-price">{{ "{:,.0f}".format(item.old_price).replace(",", ".") }}đ</div>
+                      <div class="old-price">{{ "{:,.0f}đ".format(item.old_price) }}</div>
                     {% endif %}
-                      <div class="new-price">{{ "{:,.0f}".format(item.new_price).replace(",", ".") }}đ</div>
+                    {% if item.new_price != 0 %}
+                      <div class="new-price">{{ "{:,.0f}đ".format(item.new_price) }}</div>
+                    {% else %}
+                      <div class="new-price">Free</div>
+                    {% endif %}
                   </div>
                   {% if item.in_app == 'Yes' %}
                     <div class="footnote">Includes in-app purchases</div>
@@ -67,11 +75,13 @@
               <div class="actions">
                 <form action="{{ url_for('move_to_cart') }}" method="post">
                   <input type="hidden" name="game_id" value="{{item.id}}">
+                  <input type="hidden" name="game_title" value="{{ item.title }}">
                   <button id="add-wishlist">Move to Cart</button>
                 </form>
                 <button id="gift">Gift</button>
-                <form action="{{ url_for('remove_from_cart') }}" method="post">
+                <form action="{{ url_for('remove_from_wishlist') }}" method="post">
                   <input type="hidden" name="game_id" value="{{item.id}}">
+                  <input type="hidden" name="game_title" value="{{ item.title }}">
                   <button id="remove">Remove</button>
                 </form>
               </div>
@@ -79,6 +89,13 @@
           </div>
           {% endfor %}
         </div>
+        {% else %}
+        <div class="message">
+        <!-- Display a message when the cart is empty -->
+        <img src="./static/img/empty-cart.svg" alt="">
+        <p>Your wishlist is currently empty. <br><a href="{{ url_for('index') }}">Go shopping here!</a></p>
+        </div>
+      {% endif %}
     </main>
     {% include '_footer.html' %}
   </body>

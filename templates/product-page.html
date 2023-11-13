@@ -17,6 +17,9 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
+    {% if message != None %}
+    <div id="message" class="message-notice">{{message}}</div>
+    {% endif %}
     {% include '_header.html' %}
     <main class="screen">
       <p class="directory">
@@ -110,6 +113,7 @@
               <div class="sysreq">
                 <div id="Minimum" class="syscolumn">
                   <div class="title">Minimum</div>
+                  <div class="title"><div class="64-bit-required">Requires a 64-bit processor and operating system</div></div>
                   <div class="title">OS<div id="MinOSWin"></div></div>
                   <div class="title">Processor<div id="MinProcessorWin"></div></div>
                   <div class="title">Memory<div id="MinMemoryWin"></div></div>
@@ -121,6 +125,7 @@
                 </div>
                 <div id="Recommended" class="syscolumn">
                   <div class="title">Recommended</div>
+                  <div class="title"><div class="64-bit-required">Requires a 64-bit processor and operating system</div></div>
                   <div class="title">OS<div id="RecOSWin"></div></div>
                   <div class="title">Processor<div id="RecProcessorWin"></div></div>
                   <div class="title">Memory<div id="RecMemoryWin"></div></div>

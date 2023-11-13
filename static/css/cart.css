@@ -42,6 +42,13 @@ form {
     font-weight: 300;
 }
 
+.page-title .info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
 .page-title .wallet {
     font-size: 20px;
     color: #727272;

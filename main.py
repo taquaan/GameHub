@@ -29,7 +29,7 @@ def generate_order_id():
     return str(uuid.uuid4()).replace('-', '')
 
 # SEARCH FUNCTION
-@app.route('/Search')
+@app.route('/search')
 def search():
     conn = sqlite3.connect(sqldbgame)
     cursor = conn.cursor()
@@ -110,17 +110,15 @@ def load_data_from_db(search_text):
 def login():
     error = False
     if request.method == 'POST':
-        session['next_url'] = request.referrer
         username = request.form["username"]
         password = request.form["password"]
         if check_exists(username, password):
             session['username'] = username
             session['logged_in'] = True
-            # Redirect back to the stored URL or a default page
-            next_url = session.pop('next_url', None)
             # Redirect to the next URL or a default page
-            if next_url:
-                return redirect(next_url)
+            url_fallback = session.pop('url_fallback', None)
+            if url_fallback != None:
+                return redirect(url_fallback)
             else:
                 return redirect(url_for('index'))
         else:
@@ -144,13 +142,9 @@ def check_exists(username, password):
 # LOGOUT FUNCTION
 @app.route("/logout")
 def logout():
-  session['logged_in'] = False
-  session['next_url'] = request.referrer
-  next_url = session.pop('next_url', None)
-  # Redirect to the next URL or a default page
-  if next_url:
-    return redirect(next_url)
-  else:
+    username = None
+    session['username'] = username
+    session['logged_in'] = False
     return redirect(url_for('index'))
 
 # REGISTER FUNCTION
@@ -209,7 +203,6 @@ def register():
     else:
         # User with the given username or email already exists
         return render_template("register.html", success=False, error="User with the given username or email already exists.")
-    
   return render_template("register.html")
 
 # PRODUCT PAGE FUNCTION
@@ -243,8 +236,9 @@ def product_page(GameID):
         'publisher': data[7],
       }
       game_info = {**game_info, **game_info_2}
+    action_msg = session.pop('action_msg', None)
     return render_template(
-        'product-page.html', GameID=GameID, **game_info)
+        'product-page.html', GameID=GameID, **game_info, message=action_msg)
 
 # GAME INFO API
 @app.route('/api/<int:GameID>', methods=['GET'])
@@ -310,12 +304,13 @@ def get_game_info(GameID):
         result = cursor.fetchone()
         if result:
           system_requirements[f'{item}Linux'] = result[0]
-      cursor.execute('SELECT LanguageAudio, LanguageText, Copyright FROM GameDB WHERE GameID = ?', (GameID,))
+      cursor.execute('SELECT LanguageAudio, LanguageText, Copyright, Bit64Required FROM GameDB WHERE GameID = ?', (GameID,))
       result = cursor.fetchone()
       if result:
           system_requirements['LanguageAudio'] = result[0]
           system_requirements['LanguageText'] = result[1]
           system_requirements['Copyright'] = result[2]
+          system_requirements['Bit64Required'] = result[3]
     conn.close()
     return jsonify(game_info, system_requirements)
 
@@ -354,15 +349,12 @@ def buy():
     session['instant_order_id'] = order_uuid
     # Check if user is logged in or not
     if 'username' not in session or not session['logged_in']:
+        session['url_fallback'] = url_for('instant_checkout',order_uuid=order_uuid)
         return redirect(url_for('login'))
     return redirect(url_for('instant_checkout',order_uuid=order_uuid))
 
 @app.route('/checkout-<order_uuid>')
 def instant_checkout(order_uuid):
-    # Check if the user is logged in
-    if 'username' not in session or not session['logged_in']:
-        flash('Please log in to proceed to checkout.', 'warning')
-        return redirect(url_for('login'))
     # Retrieve the user's cart from the session
     cart = session.get('instant_cart', [])
     # Calculate total price
@@ -396,6 +388,10 @@ def add_to_cart():
         'game_cover': game_cover,
         'supported_os': supported_os,
     }
+    # Check if user is logged in or not
+    if 'username' not in session or not session['logged_in']:
+        session['url_fallback'] = url_for('add_to_cart')
+        return redirect(url_for('product_page', GameID=game_id))
     # Get the current cart or create an empty one
     cart = session.get('cart', [])
     # Check if the item is already in the cart
@@ -403,7 +399,7 @@ def add_to_cart():
         if cart_item['id'] == game_id:
             # Item is already in the cart, update quantity or handle as needed
             cart_item['quantity'] += 1
-            flash(f'{game_title} is already in your cart.', 'success')
+            session['action_msg'] = f'{game_title} is already in your cart.'
             session['cart'] = cart  # Update the cart in the session
             return redirect(url_for('product_page', GameID=game_id))
     # Check if the 'wishlist' key exists in the session
@@ -411,21 +407,33 @@ def add_to_cart():
         wishlist = session['wishlist']
         # Check if the item is in the wishlist
         if any(cart_item['id'] == game_id for cart_item in wishlist):
-            # Item is in the wishlist, redirect to move_to_cart route
-            flash(f'{game_title} is in your wishlist. Please use Move to Cart when in Wishlist page', 'success')
+            # Filter the cart to exclude the item with the specified game_id
+            item_to_move = next((item for item in wishlist if item['id'] == game_id), None)
+            # Check if the item was found in the cart
+            if item_to_move:
+                # Remove the item from the cart
+                wishlist.remove(item_to_move)
+                # Check if the 'wishlist' key exists in the session
+                current_cart = session.get('cart', [])
+                # Add the item to the wishlist
+                current_cart.append(item_to_move)
+                # Update the cart and wishlist in the session
+                session['cart'] = current_cart
+                session['wishlist'] = wishlist
+                session['action_msg'] = f'{game_title} moved to cart successfully.'
             return redirect(url_for('product_page', GameID=game_id))
     # Item is not in the cart, add it
     cart.append(item)
     session['cart'] = cart
-    # Check if user is logged in or not
-    if 'username' not in session or not session['logged_in']:
-        return redirect(url_for('login'))
-    flash(f'{game_title} has been added to your cart.', 'success')
+    session['action_msg'] = f'{game_title} has been added to your cart.'
     return redirect(url_for('product_page', GameID=game_id))
 
 #VIEW CART FUNCTION
 @app.route('/cart')
 def view_cart():
+    if 'username' not in session or not session['logged_in']:
+        session['url_fallback'] = url_for('cart')
+        return redirect(url_for('login'))
     current_cart = []
     discount = 0
     total_price = 0
@@ -439,12 +447,11 @@ def view_cart():
           else:
             og_total_price += int(item['new_price'])
           total_price += int(item['new_price'])
-          discount = og_total_price - total_price
+          discount = max(0, og_total_price - total_price)
           num_items = len(current_cart)
-    if 'username' not in session or not session['logged_in']:
-        return redirect(url_for('login'))
+    action_msg = session.pop('action_msg', None)
     return render_template(
-        "cart.html", cart=current_cart, total_price=total_price, og_total=og_total_price, discount=discount, num_items=num_items)
+        "cart.html", cart=current_cart, total_price=total_price, og_total=og_total_price, discount=discount, num_items=num_items, message=action_msg)
 
 #MOVE TO CART FUNCTION
 @app.route('/move_to_cart', methods=['POST'])
@@ -454,9 +461,11 @@ def move_to_cart():
     # Check if the 'wishlist' key exists in the session
     if 'wishlist' in session:
         # Filter the cart to exclude the item with the specified game_id
+
         item_to_move = next((item for item in wishlist if item['id'] == game_id), None)
         # Check if the item was found in the cart
         if item_to_move:
+            game_title = request.form.get('game_title')
             # Remove the item from the cart
             wishlist.remove(item_to_move)
             # Check if the 'wishlist' key exists in the session
@@ -466,7 +475,7 @@ def move_to_cart():
             # Update the cart and wishlist in the session
             session['cart'] = current_cart
             session['wishlist'] = wishlist
-            flash('Item moved to cart successfully.', 'success')
+            session['action_msg'] = f'{game_title} moved to cart successfully.'
     return redirect(url_for('view_wishlist'))
 
 #REMOVE FROM CART FUNCTION
@@ -476,11 +485,12 @@ def remove_from_cart():
     game_id = request.form.get('game_id')
     # Check if the 'cart' key exists in the session
     if 'cart' in session:
+        game_title = request.form.get('game_title')
         # Filter the cart to exclude the item with the specified game_id
         current_cart = [item for item in current_cart if item['id'] != game_id]
         # Update the cart in the session
         session['cart'] = current_cart
-        flash(f'Item removed from the cart successfully.', 'success')
+        session['action_msg'] = f'{game_title} removed from the cart successfully.'
     return redirect(url_for('view_cart'))
 
 #ADD TO WISHLIST FUNCTION
@@ -517,34 +527,13 @@ def add_to_wishlist():
         if wishlist_item['id'] == game_id:
             # Item is already in the cart, update quantity or handle as needed
             wishlist_item['quantity'] += 1
-            flash(f'{game_title} is already in your cart.', 'success')
+            session['action_msg'] = f'{game_title} is already in your wishlist.'
             session['wishlist'] = wishlist  # Update the cart in the session
             return redirect(url_for('product_page', GameID=game_id))
 
-    # Check if the 'wishlist' key exists in the session
-    if 'cart' in session:
-        cart = session['cart']
-        # Check if the item is in the wishlist
-        if any(wishlist_item['id'] == game_id for wishlist_item in cart):
-            # Item is in the wishlist, redirect to move_to_cart route
-            flash(f'{game_title} is in your cart. Please use Move to Wishlist when in your cart page', 'success')
-            return redirect(url_for('product_page', GameID=game_id))
-    # Item is not in the cart, add it
-    wishlist.append(item)
-    session['wishlist'] = wishlist
-    # Check if user is logged in or not
-    if 'username' not in session or not session['logged_in']:
-        return redirect(url_for('login'))
-    flash(f'{game_title} has been added to your wishlist.', 'success')
-    return redirect(url_for('product_page', GameID=game_id))
-
-#MOVE TO WISHLIST FUNCTION
-@app.route('/move_to_wishlist', methods=['POST'])
-def move_to_wishlist():
-    current_cart = session.get("cart", [])
-    game_id = request.form.get('game_id')
     # Check if the 'cart' key exists in the session
     if 'cart' in session:
+        current_cart = session['cart']
         # Filter the cart to exclude the item with the specified game_id
         item_to_move = next((item for item in current_cart if item['id'] == game_id), None)
         # Check if the item was found in the cart
@@ -558,15 +547,63 @@ def move_to_wishlist():
             # Update the cart and wishlist in the session
             session['cart'] = current_cart
             session['wishlist'] = wishlist
-            flash('Item moved to wishlist successfully.', 'success')
+            session['action_msg'] = f'{game_title} moved to wishlist successfully.'
+            return redirect(url_for('product_page', GameID=game_id))
+    # Item is not in the cart, add it
+    wishlist.append(item)
+    session['wishlist'] = wishlist
+    # Check if user is logged in or not
+    if 'username' not in session or not session['logged_in']:
+        session['url_fallback'] = url_for('product_page', GameID=game_id)
+        return redirect(url_for('login'))
+    session['action_msg'] = f'{game_title} has been added to your wishlist.'
+    return redirect(url_for('product_page', GameID=game_id))
+
+#MOVE TO WISHLIST FUNCTION
+@app.route('/move_to_wishlist', methods=['POST'])
+def move_to_wishlist():
+    current_cart = session.get("cart", [])
+    game_id = request.form.get('game_id')
+    # Check if the 'cart' key exists in the session
+    if 'cart' in session:
+        # Filter the cart to exclude the item with the specified game_id
+        item_to_move = next((item for item in current_cart if item['id'] == game_id), None)
+        # Check if the item was found in the cart
+        if item_to_move:
+            game_title = request.form.get('game_title')
+            # Remove the item from the cart
+            current_cart.remove(item_to_move)
+            # Check if the 'wishlist' key exists in the session
+            wishlist = session.get('wishlist', [])
+            # Add the item to the wishlist
+            wishlist.append(item_to_move)
+            # Update the cart and wishlist in the session
+            session['cart'] = current_cart
+            session['wishlist'] = wishlist
+            session['action_msg'] = f'{game_title} moved to wishlist successfully.'
     return redirect(url_for('view_cart'))
+
+#REMOVE FROM WISHLIST FUNCTION
+@app.route('/remove_from_wishlist', methods=['POST'])
+def remove_from_wishlist():
+    wishlist = session.get("wishlist", [])
+    game_id = request.form.get('game_id')
+    # Check if the 'wishlist' key exists in the session
+    if 'wishlist' in session:
+        game_title = request.form.get('game_title')
+        # Filter the wishlist to exclude the item with the specified game_id
+        wishlist = [item for item in wishlist if item['id'] != game_id]
+        # Update the wishlist in the session
+        session['wishlist'] = wishlist
+        session['action_msg'] = f'{game_title} removed from the wishlist successfully.'
+    return redirect(url_for('view_wishlist'))
 
 #CHECKOUT FUNCTION
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     # Check if the user is logged in
     if 'username' not in session or not session['logged_in']:
-        flash('Please log in to proceed to checkout.', 'warning')
+        
         return redirect(url_for('login'))
     # Retrieve the user's cart from the session
     cart = session.get('cart', [])
@@ -579,10 +616,6 @@ def checkout():
 #PROCEED TO CHECKOUT FUNCTION
 @app.route('/proceed-checkout-<order_uuid>', methods=['GET', 'POST'])
 def proceed_checkout(order_uuid):
-    # Check if the user is logged in
-    if 'username' not in session or not session['logged_in']:
-        flash('Please log in to proceed to checkout.', 'warning')
-        return redirect(url_for('login'))
     # Retrieve the user's cart from the session
     if order_uuid != session['instant_order_id']:
       cart = session.get('cart', [])
@@ -617,8 +650,9 @@ def view_wishlist():
             total_price += float(item['new_price'])
     if 'username' not in session or not session['logged_in']:
         return redirect(url_for('login'))
+    action_msg = session.pop('action_msg', None)
     return render_template(
-        "wishlist.html", wishlist=wishlist, total_price=total_price)
+        "wishlist.html", wishlist=wishlist, total_price=total_price, message=action_msg)
 
 #SAVE ORDER FEATURE
 def save_order(user_id, order_uuid, total_price, cart):
@@ -668,6 +702,7 @@ def load_data_from_user(username):
 @app.route("/admin")
 def admin():
   if 'username' not in session or not session['logged_in']:
+      
       return redirect(url_for('login'))
   return render_template("admin.html")
 

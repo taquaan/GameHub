@@ -18,15 +18,23 @@
     </script>
   </head>
   <body>
+    {% if message != None %}
+    <div id="message" class="message-notice">{{message}}</div>
+    {% endif %}
     {% include '_header.html' %}
     <main class="screen">
       <div class="content">
         {% if cart %}
           <div class="page-title">
             <h1>Your Cart</h1>
-            <div class="wallet">
-              Your current wallet: <b>{{num_items}}đ</b>
-              <i class="fa-light fa-circle-plus"></i>
+            <div class="info">
+              <div class="wallet">
+                Your current wallet: <b>0đ</b>
+                <i class="fa-light fa-circle-plus"></i>
+              </div>
+              <div class="wallet">
+                Your current cart: <b>{{num_items}} items</b>
+              </div>
             </div>
           </div>
           <!--Left column-->
@@ -72,11 +80,13 @@
                 <div class="actions">
                   <form action="{{ url_for('move_to_wishlist') }}" method="post">
                     <input type="hidden" name="game_id" value="{{item.id}}">
-                    <button id="add-wishlist">Add to Wishlist</button>
+                    <input type="hidden" name="game_title" value="{{ item.title }}">
+                    <button id="add-wishlist">Move to Wishlist</button>
                   </form>
                   <button id="gift">Buy as Gift</button>
                   <form action="{{ url_for('remove_from_cart') }}" method="post">
                     <input type="hidden" name="game_id" value="{{item.id}}">
+                    <input type="hidden" name="game_title" value="{{ item.title }}">
                     <button id="remove">Remove</button>
                   </form>
                 </div>

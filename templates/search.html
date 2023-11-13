@@ -9,11 +9,14 @@
     {% include '_header.html' %}
     <main class="content">
         <div class="left-col">
+            <div class="page-title">
+                <h1>Filters</p></h1>
+            </div>
                 <div class="searchSection">
                     <div class="searchbytext">
-                        <form method="POST" action="/searchData">
-                            <input type="text" name="searchInput" placeholder="Enter your search term">
-                            <button type="submit" style="display: none;">Search</button>
+                        <form method="POST" action="{{ url_for('searchData') }}">
+                            <input type="text" name="searchInput" placeholder="Enter your search term" value="{{ search_text }}">
+                            <button type="submit" value="Search" style="display: none;">Search</button>
                         </form>
                     </div>
                     <div class="filterbygenre">
@@ -42,9 +45,6 @@
                 </div>
         </div>
         <div class="right-col">
-            <div class="page-title">
-                <h1>Your search term: <p>{{search_text}}</p></h1>
-            </div>
             <table class="cart">
                 <div class="product-grid">
                     {% for product in table %}

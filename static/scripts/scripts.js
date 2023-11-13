@@ -240,10 +240,16 @@ fetch(`/api/${GameID}`)
         const copyrightElements = document.getElementById("copyright-placeholder");
         const languageAudioElements = document.getElementById("audio-placeholder");
         const languageTextElements = document.getElementById("text-placeholder");
+        const Bit64Required = document.getElementsByClassName("64-bit-required");
 
         copyrightElements.innerHTML = data[1].Copyright;
         languageAudioElements.textContent = data[1].LanguageAudio;
         languageTextElements.textContent = data[1].LanguageText;
+        for (let i = 0; i < Bit64Required.length; i++) {
+            if (data[1].Bit64Required === null){
+                Bit64Required[i].parentElement.classList.add("hidden");
+            }
+        }
 
         // Features
         const featuresList = ['Singleplayer', 'Multiplayer', 'Online Co-Op', 'Online PvP', 'Controller', 'Achievements', 'Cloud Saves'];

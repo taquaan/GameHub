@@ -5,8 +5,6 @@
 body {
   background-color: #121212;
   color: white;
-  font-family: "Inter", Helvetica;
-  font-weight: 300;
 }
 
 .left-col{
@@ -25,6 +23,8 @@ body {
   padding-left: 128px;
   padding-right: 128px;
   padding-bottom: 64px;
+  font-family: "Inter", Helvetica;
+  font-weight: 300;
 }
 
 .page-title {
@@ -37,7 +37,7 @@ body {
 .page-title h1 {
   display: flex;
   flex-direction: row;
-  font-size: 48px;
+  font-size: 40px;
   color: #ffffff;
   font-weight: 300;
 }
@@ -46,11 +46,6 @@ body {
   color: #727272;
   font-weight: 300;
   margin-left: 20px;
-}
-
-.searchSection {
-  width: 70%;
-  margin-left: 128px;
 }
 
 .searchSection input {
@@ -178,3 +173,39 @@ p#msg {
   font-size: 24px;
   color: #727272;
 }
+
+.searchSection .filterbygenre {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 500px;
+  margin-top: 40px;
+  background-color: #00000033;
+  border-radius: 20px;
+}
+.filterbygenre input {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.searchSection .field {
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+}
+.field span {
+  margin-left: 15px;
+  font-size: 20px;
+}
+.searchSection button {
+  margin-top: 20px;
+  margin-left: 15px;
+  width: 120px;
+  height: 40px;
+  background-color: orange;
+  border-radius: 10px;
+  border: none;
+}
+

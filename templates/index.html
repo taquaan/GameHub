@@ -11,73 +11,118 @@
 <body>
   {% include '_header.html' %}
     <div class="carousel">
-        <button class="carousel-button" onclick="previousSlide()">&#8249;</button>
         {% for product in table %}
-        {% if loop.index <= 4 %} <div class="carousel-item"
-            style="background-image:url('{{product[11]}}'); background-repeat: no-repeat; ">
-            <div class="carousel-indicator">
-                <div class="flexing">
-                    <form action="/cart/add" method="POST">
-                        <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
-                    </form>
-                    <h3>Available Now</h3>
-                    <h2>{{ product[1] }}</h2>
-                    <h3>{{ product[12] }}</h3>
+        {% if loop.index <= 4 %}
+        <div class="carousel-item">
+            <img class="your-image-class" src="{{ product[2] }}" alt="Product Image">
+            <div class="carousel-info-container">
+                <div class="carousel-indicator"></div>
+                <div class="carousel-nav">
+                    <button class="carousel-button left" onclick="previousSlide()">&#8249;</button>
+                    <button class="carousel-button right" onclick="nextSlide()">&#8250;</button>
                 </div>
-                <div class="flexing2">
-                    <img src="{{product[7]}}" alt="{{product[12]}}">
-                    <img src="{{product[8]}}" alt="{{product[13]}}">
-                    <img src="{{product[9]}}" alt="{{product[14]}}">
+                <div class="carousel-indicator">
+                    <div class="flexing">
+                        <form action="/cart/add" method="POST">
+                            <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
+                        </form>
+                        <h4>Available Now</h4>
+                        <h2>{{ product[1] }}</h2>
+                        <div class="price-container">
+                            {% if product[10] != 0 %}
+                            <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
+                            {% endif %}
+                              {% if product[11] != None %}
+                                <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
+                              {% endif %}
+                              {% if product[12] != 0 %}
+                                <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
+                              {% else %}
+                                <div class="new-price">Free</div>
+                              {% endif %}
+                        </div>
+                    </div>
+                    <div class="flexing2">
+                        <img src="{{product[7]}}" alt="{{product[12]}}">
+                        <img src="{{product[8]}}" alt="{{product[13]}}">
+                        <img src="{{product[9]}}" alt="{{product[14]}}">
+                    </div>
                 </div>
             </div>
-    </div>
+        </div>
     {% endif %}
     {% endfor %}
-    <button class="carousel-button" onclick="nextSlide()">&#8250;</button>
     </div>
     <div class="content">
         <table class="special-offers">
             <h1>Special Offers</h1>
             <div class="product-grid">
-                {% for product in table %}
-                {% if loop.index <= 6 %} <div class="product-item" style="background-image:url('{{product[11]}}')">
-            </div>
-            <div class="product-item-ex" style="background-image:url('{{product[11]}}')">
-                <div class="indicator">
-                    <div class="indicator-detailed">
-                        <h2>{{ product[1] }}</h2>
-                        <div class="flexing">
-                            <form action="/cart/add" method="POST">
-                                <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
-                                <input type="hidden" name="quantity" value="1" min="1">
-                                <button type="submit">Add to Cart</button>
-                            </form>
-                            <h3>{{product[7]}}</h3>
-                        </div>
+                {% for product in table if product[10] != 0 %}
+                <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
+                    <img src="{{ product[2] }}">
+                    <h2>{{ product[1] }}</h2>
+                    <div class="supported-os">
+                        {% if 'Windows' in product[17] %}
+                        <div id="supported-os-win"><i class="fa-brands fa-microsoft"></i></div>
+                        {% endif %}
+                        {% if 'macOS' in product[17] %}
+                        <div id="supported-os-mac"><i class="fa-brands fa-apple"></i></div>
+                        {% endif %}
+                        {% if 'Linux' in product[17] %}
+                        <div id="supported-os-linux"><i class="fa-brands fa-linux"></i></div>
+                        {% endif %}
                     </div>
-                </div>
+                    <div class="price-container">
+                        {% if product[10] != 0 %}
+                        <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
+                        {% endif %}
+                        {% if product[11] != None %}
+                            <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
+                        {% endif %}
+                        {% if product[12] != 0 %}
+                            <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
+                        {% else %}
+                            <div class="new-price">Free</div>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
             </div>
-            {% endif %}
-            {% endfor %}
         </table>
         <h1>Recommendation</h1>
-        <div class="gameshower">
-            {% for product in table %}
-            <div class="product-item-vertical">
-                <img src="{{product[11]}}" alt="{{product[11]}}">
-                <div class="flexing">
+        <table class="cart">
+            <div class="product-grid">
+                {% for product in table %}
+                <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
+                    <img src="{{ product[2] }}">
                     <h2>{{ product[1] }}</h2>
-                </div>
-                <div class="flexing2">
-                    <h3>{{product[7]}}</h3>
-                </div>
-                <form action="/cart/add" method="POST">
-                    <input type=" hidden" name="product_id" value="{{ product[1] }}" style="display: none;">
-                </form>
-            </div>
-            {% endfor %}
-            </p>
-        </div>
+                    <div class="supported-os">
+                        {% if 'Windows' in product[17] %}
+                          <div id="supported-os-win"><i class="fa-brands fa-microsoft"></i></div>
+                        {% endif %}
+                        {% if 'macOS' in product[17] %}
+                          <div id="supported-os-mac"><i class="fa-brands fa-apple"></i></div>
+                        {% endif %}
+                        {% if 'Linux' in product[17] %}
+                          <div id="supported-os-linux"><i class="fa-brands fa-linux"></i></div>
+                        {% endif %}
+                    </div>
+                    <div class="price-container">
+                        {% if product[10] != 0 %}
+                        <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
+                        {% endif %}
+                          {% if product[11] != None %}
+                            <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
+                          {% endif %}
+                          {% if product[12] != 0 %}
+                            <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
+                          {% else %}
+                            <div class="new-price">Free</div>
+                          {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+        </table>
     </div>
   {% include '_footer.html' %}
 </body>

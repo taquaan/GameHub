@@ -38,15 +38,23 @@
 .header .logo {
   position: relative;
   margin-top: 4px;
-  width: 280px;
+  height: 60px;
 }
 
 .header .full-logo {
   position: relative;
-  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.header .compact-logo {
+  position: relative;
+  height: 100%;
+  display: none;
 }
 
 .header .text-wrapper {
+  transition: 0.4s;
   position: relative;
   width: fit-content;
   font-family: "Inter", Helvetica;
@@ -59,14 +67,11 @@
 }
 
 .header .text-wrapper:hover {
-  transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s;
-  -o-transition-duration: 0.4s;
   color: white;
 }
 
 .header .button {
+  transition: 0.4s;
   display: inline-block;
   background-color: #444;
   height: 50px;
@@ -84,10 +89,6 @@
 }
 
 .header .button:hover {
-  transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s;
-  -o-transition-duration: 0.4s;
   background-color: white;
   color: black;
 }

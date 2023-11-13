@@ -1,6 +1,6 @@
 <header class="header">
     <div class="nav">
-      <a class="logo" href="{{ url_for('index') }}"><img class="full-logo" src="./static/img/full-logo.svg" /></a>
+      <a class="logo" href="{{ url_for('index') }}"><img class="full-logo" src="./static/img/full-logo.svg" /><img class="compact-logo" src="./static/img/compact-logo.svg" /></a>
       <div class="nav-text">
         <div class="text-wrapper">Store</div>
         <div class="text-wrapper">Community</div>
@@ -23,6 +23,7 @@
           </div>
           <div class="fa-solid fa-chevron-down dropdown">
             <div class="dropdown-content">
+              <a href="{{ url_for('view_wishlist') }}">Wishlist</a>
               <a href="#">My Dashboard</a>
               <a href="#">Settings</a>
               <a href="{{ url_for('logout') }}">Logout</a>
