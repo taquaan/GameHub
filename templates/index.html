@@ -50,100 +50,80 @@
                 </div>
             </div>
         </div>
-    {% endif %}
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
     </div>
     <div class="content">
-        <table class="special-offers">
-            <h1>Special Offers</h1>
-            <div class="product-grid">
-                {% for product in table if product[10] != 0 %}
-                <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
-                    <img src="{{ product[2] }}">
-                    <h2>{{ product[1] }}</h2>
-                    <div class="supported-os">
-                        {% if 'Windows' in product[17] %}
+        <h1>Special Offers</h1>
+        <div class="product-grid">
+            {% for product in table if product[10] != 0 %}
+            <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
+                <img src="{{ product[2] }}">
+                <h2>{{ product[1] }}</h2>
+                <div class="supported-os">
+                    {% if 'Windows' in product[17] %}
+                    <div id="supported-os-win"><i class="fa-brands fa-microsoft"></i></div>
+                    {% endif %}
+                    {% if 'macOS' in product[17] %}
+                    <div id="supported-os-mac"><i class="fa-brands fa-apple"></i></div>
+                    {% endif %}
+                    {% if 'Linux' in product[17] %}
+                    <div id="supported-os-linux"><i class="fa-brands fa-linux"></i></div>
+                    {% endif %}
+                </div>
+                <div class="price-container">
+                    {% if product[10] != 0 %}
+                    <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
+                    {% endif %}
+                    {% if product[11] != None %}
+                        <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
+                    {% endif %}
+                    {% if product[12] != 0 %}
+                        <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
+                    {% else %}
+                        <div class="new-price">Free</div>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <h1>Recommendation</h1>
+        <div class="product-grid">
+            {% for product in table %}
+            <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
+                <img src="{{ product[2] }}">
+                <h2>{{ product[1] }}</h2>
+                <div class="supported-os">
+                    {% if 'Windows' in product[17] %}
                         <div id="supported-os-win"><i class="fa-brands fa-microsoft"></i></div>
-                        {% endif %}
-                        {% if 'macOS' in product[17] %}
+                    {% endif %}
+                    {% if 'macOS' in product[17] %}
                         <div id="supported-os-mac"><i class="fa-brands fa-apple"></i></div>
-                        {% endif %}
-                        {% if 'Linux' in product[17] %}
+                    {% endif %}
+                    {% if 'Linux' in product[17] %}
                         <div id="supported-os-linux"><i class="fa-brands fa-linux"></i></div>
-                        {% endif %}
-                    </div>
-                    <div class="price-container">
-                        {% if product[10] != 0 %}
-                        <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
-                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="price-container">
+                    {% if product[10] != 0 %}
+                    <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
+                    {% endif %}
                         {% if product[11] != None %}
-                            <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
+                        <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
                         {% endif %}
                         {% if product[12] != 0 %}
-                            <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
+                        <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
                         {% else %}
-                            <div class="new-price">Free</div>
+                        <div class="new-price">Free to Play</div>
                         {% endif %}
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-        </table>
-        <h1>Recommendation</h1>
-        <table class="cart">
-            <div class="product-grid">
-                {% for product in table %}
-                <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
-                    <img src="{{ product[2] }}">
-                    <h2>{{ product[1] }}</h2>
-                    <div class="supported-os">
-                        {% if 'Windows' in product[17] %}
-                          <div id="supported-os-win"><i class="fa-brands fa-microsoft"></i></div>
-                        {% endif %}
-                        {% if 'macOS' in product[17] %}
-                          <div id="supported-os-mac"><i class="fa-brands fa-apple"></i></div>
-                        {% endif %}
-                        {% if 'Linux' in product[17] %}
-                          <div id="supported-os-linux"><i class="fa-brands fa-linux"></i></div>
-                        {% endif %}
-                    </div>
-                    <div class="price-container">
-                        {% if product[10] != 0 %}
-                        <div class="discount-per">-{{ "{:.0%}".format(product[10]) }}</div>
-                        {% endif %}
-                          {% if product[11] != None %}
-                            <div class="old-price">{{ "{:,.0f}đ".format(product[11]) }}</div>
-                          {% endif %}
-                          {% if product[12] != 0 %}
-                            <div class="new-price">{{ "{:,.0f}đ".format(product[12]) }}</div>
-                          {% else %}
-                            <div class="new-price">Free</div>
-                          {% endif %}
-                    </div>
-                </a>
-                {% endfor %}
-        </table>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
     </div>
   {% include '_footer.html' %}
 </body>
 <script>
-    const items = document.getElementsByClassName("product-item");
-    const itemBigger = document.getElementsByClassName("product-item-ex");
-
-    for (let i = 0; i < items.length; i++) {
-        items[i].addEventListener("click", () => {
-            itemBigger[i].classList.add("active");
-            items[i].classList.add("un-active");
-        });
-    }
-
-    for (let i = 0; i < itemBigger.length; i++) {
-        itemBigger[i].addEventListener("click", () => {
-            itemBigger[i].classList.remove("active");
-            items[i].classList.remove("un-active");
-        });
-    }
-
 
     var slideIndex = 0;
     showSlide(slideIndex);
