@@ -17,6 +17,23 @@ body {
   overflow-x: hidden;
 }
 
+@media screen and (max-width:1280px){
+  .carousel-item {
+      width: 122vw !important;
+      height: calc(100vh - 140px);
+  }
+  .carousel-item .carousel-indicator {
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+}
+  .carousel-item .flexing2 img {
+      width: 200px;
+  }
+  .content .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .content {
   width: 100%;
   display: flex;
@@ -162,7 +179,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100vh - 140px);
+  height: 100%;
   z-index: 2;
 }
 

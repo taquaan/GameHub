@@ -44,40 +44,6 @@ footer{
   .header .full-logo {
       display: none;
   }
-  .carousel-item {
-      width: 100% !important;
-  }
-  .carousel-item .flexing2 img {
-      width: 200px;
-  }
-  .content .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (max-width:920px){
-  * {
-      zoom: 90%; 
-      -moz-transform: scale(0.95); 
-      -moz-transform-origin: 0 0;
-  }
-  .header, .content, .footer, .directory {
-      padding-left: 64px !important;
-      padding-right: 64px !important;
-      grid-column-gap: 20px !important;
-  }
-  .header .compact-logo {
-      display: block;
-  }
-  .header .full-logo {
-      display: none;
-  }
-  .carousel-item .flexing2 img {
-    width: 200px;
-  }
-  .content .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 ::-webkit-scrollbar {
