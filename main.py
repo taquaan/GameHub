@@ -364,10 +364,6 @@ def instant_checkout(order_uuid):
 #ADD TO CART FUNCTION
 @app.route('/add-to-cart', methods=['POST'])
 def add_to_cart():
-    # Check if user is logged in or not
-    if 'username' not in session or not session['logged_in']:
-        session['url_fallback'] = url_for('product_page', GameID=game_id)
-        return redirect(url_for('login'))
     # Get data from the form
     game_id = request.form.get('game_id')
     game_title = request.form.get('game_title')
@@ -392,6 +388,10 @@ def add_to_cart():
         'game_cover': game_cover,
         'supported_os': supported_os,
     }
+    # Check if user is logged in or not
+    if 'username' not in session or not session['logged_in']:
+        session['url_fallback'] = url_for('product_page', GameID=game_id)
+        return redirect(url_for('login'))
     # Get the current cart or create an empty one
     cart = session.get('cart', [])
     # Check if the item is already in the cart
@@ -496,10 +496,6 @@ def remove_from_cart():
 #ADD TO WISHLIST FUNCTION
 @app.route('/add-to-wishlist', methods=['POST'])
 def add_to_wishlist():
-    # Check if user is logged in or not
-    if 'username' not in session or not session['logged_in']:
-        session['url_fallback'] = url_for('product_page', GameID=game_id)
-        return redirect(url_for('login'))
     # Get data from the form
     game_id = request.form.get('game_id')
     game_title = request.form.get('game_title')
@@ -524,6 +520,10 @@ def add_to_wishlist():
         'game_cover': game_cover,
         'supported_os': supported_os,
     }
+    # Check if user is logged in or not
+    if 'username' not in session or not session['logged_in']:
+        session['url_fallback'] = url_for('product_page', GameID=game_id)
+        return redirect(url_for('login'))
     # Get the current cart or create an empty one
     wishlist = session.get('wishlist', [])
     # Check if the item is already in the cart
