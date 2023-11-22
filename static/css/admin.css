@@ -176,7 +176,7 @@ html {
 }
 .user-search-flex > .users-container > .user-holder {
   width: 100%;
-  height: 35%;
+  height: 19vh;
   display: flex;
   align-items: center;
   gap: 2%;
