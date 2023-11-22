@@ -603,7 +603,6 @@ def remove_from_wishlist():
 def checkout():
     # Check if the user is logged in
     if 'username' not in session or not session['logged_in']:
-        
         return redirect(url_for('login'))
     # Retrieve the user's cart from the session
     cart = session.get('cart', [])
@@ -611,13 +610,14 @@ def checkout():
     total_price = sum(item['new_price'] for item in cart)
     # Generate a unique order_id (you can use uuid or any other method)
     order_uuid = generate_order_id()
+    session['order_id'] = order_uuid
     return render_template('checkout.html', cart=cart, total_price=total_price, order_uuid=order_uuid)
 
 #PROCEED TO CHECKOUT FUNCTION
 @app.route('/proceed-checkout-<order_uuid>', methods=['GET', 'POST'])
 def proceed_checkout(order_uuid):
     # Retrieve the user's cart from the session
-    if order_uuid != session['instant_order_id']:
+    if order_uuid == session['order_id']:
       cart = session.get('cart', [])
     else:
       cart = session.get('instant_cart', [])
