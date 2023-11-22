@@ -366,7 +366,7 @@ def instant_checkout(order_uuid):
 def add_to_cart():
     # Check if user is logged in or not
     if 'username' not in session or not session['logged_in']:
-        session['url_fallback'] = url_for('add_to_cart')
+        session['url_fallback'] = url_for('product_page', GameID=game_id)
         return redirect(url_for('login'))
     # Get data from the form
     game_id = request.form.get('game_id')
