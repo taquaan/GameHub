@@ -54,10 +54,16 @@
         {% endfor %}
     </div>
     <div class="content">
-        <h1>Special Offers</h1>
-        <div class="product-grid">
+        <div class="special-off-flexbox">
+            <h1>Special Offers</h1>
+            <div class="change-icon">
+                <i class="fa-sharp fa-regular fa-less-than"></i>
+                <i class="fa-sharp fa-regular fa-greater-than"></i>
+            </div>    
+        </div>
+        <div class="product-grid special-offer">
             {% for product in table if product[10] != 0 %}
-            <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
+            <a class="product-item offer-product" href="{{ url_for('product_page', GameID=product[0]) }}">
                 <img src="{{ product[2] }}">
                 <h2>{{ product[1] }}</h2>
                 <div class="supported-os">
@@ -88,7 +94,7 @@
             {% endfor %}
         </div>
         <h1>Recommendation</h1>
-        <div class="product-grid">
+        <div class="product-grid recommend">
             {% for product in table %}
             <a class="product-item" href="{{ url_for('product_page', GameID=product[0]) }}">
                 <img src="{{ product[2] }}">
@@ -154,5 +160,30 @@
 
         slides[slideIndex].style.display = "block";
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel = document.querySelector('.special-offer');
+        const prevBtn = document.querySelector('.fa-less-than');
+        const nextBtn = document.querySelector('.fa-greater-than');
+        let slidePosition = 0;
+        const slidesToShow = 4;
+        const products = document.querySelectorAll('.offer-product');
+        const totalSlides = products.length;
+        console.log(totalSlides);
+        function moveToNextSlide() {
+          if (slidePosition > -(totalSlides - slidesToShow)) {
+            slidePosition -= 1;
+            carousel.style.transform = `translateX(${slidePosition * (100 / slidesToShow)}%)`;
+          }
+        }
+        function moveToPrevSlide() {
+          if (slidePosition < 0) {
+            slidePosition += 1;
+            carousel.style.transform = `translateX(${slidePosition * (100 / slidesToShow)}%)`;
+          }
+        }
+        nextBtn.addEventListener('click', moveToNextSlide);
+        prevBtn.addEventListener('click', moveToPrevSlide);
+      });
 
 </script>
