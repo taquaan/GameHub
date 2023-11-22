@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart | GameHub</title>
+    <link rel="stylesheet" href="./static/css/cart.css" />
+    <link rel="stylesheet" href="./static/css/font-awesome.min.css" />
+  </head>
+  <body>
+    {% include '_header.html' %}
+    <main class="screen">
+      <div class="content">
+        <div class="message">
+          <!-- Display a message when the purchase is successful -->
+          <img src="./static/img/success.svg" style="margin-bottom: 0px;" alt="">
+          <p>Your order has been successfully processed. <br><a href="{{ url_for('index') }}">Continue shopping here!</a></p>
+        </div>
+      </div>
+    </main>
+    {% include '_footer.html' %}
+  </body>
+</html>

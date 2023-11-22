@@ -635,8 +635,9 @@ def proceed_checkout(order_uuid):
         order = save_order(user_id, order_uuid, total_price, cart)
         # Clear the cart after successful payment
         session['cart'] = []
+        session['checkout_success'] = True
         flash('Payment successful. Thank you for your purchase!', 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('success'))
     return render_template('checkout.html', cart=cart, total_price=total_price)
 
 #WISHLIST FEATURE
@@ -738,6 +739,17 @@ def delete_user():
   delete_result = delete_user_from_db(user_id)
   delete_success = True
   return render_template("admin.html", delete_success = delete_success)
+
+# SUCCESS PAGE
+@app.route('/success', methods=['GET'])
+def success():
+    # Check if the session variable is set to True (indicating a successful checkout)
+    if session.get('checkout_success'):
+        # Clear the session variable to avoid showing success on page refresh
+        session.pop('checkout_success', None)
+        return render_template("success.html")
+    else:
+        return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
