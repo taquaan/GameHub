@@ -101,6 +101,7 @@
                   <button id="gift">Buy as Gift</button>
                   <form action="{{ url_for('remove_from_cart') }}" method="post">
                     <input type="hidden" name="game_id" value="{{item.id}}">
+                    <input type="hidden" name="game_title" value="{{ item.title }}">
                     <button id="remove">Remove</button>
                   </form>
                 </div>
