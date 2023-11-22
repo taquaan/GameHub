@@ -237,20 +237,11 @@ body {
 .product-grid.special-offer{
   grid-auto-flow: column;
   grid-auto-columns: calc((100%/4) - 15px);
+  overflow-x: auto;
   transition: 0.5s;
 }
-.special-off-flexbox{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.special-off-flexbox > .change-icon{
-  display: flex;
-  align-items: center;
-  gap: 2vw;
-}
-.change-icon > i{
-  cursor: pointer;
+.product-grid.special-offer::-webkit-scrollbar{
+  height: 0;
 }
 .product-item {
   padding: 20px;

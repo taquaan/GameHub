@@ -54,13 +54,7 @@
         {% endfor %}
     </div>
     <div class="content">
-        <div class="special-off-flexbox">
-            <h1>Special Offers</h1>
-            <div class="change-icon">
-                <i class="fa-sharp fa-regular fa-less-than"></i>
-                <i class="fa-sharp fa-regular fa-greater-than"></i>
-            </div>    
-        </div>
+        <h1>Special Offers</h1>
         <div class="product-grid special-offer">
             {% for product in table if product[10] != 0 %}
             <a class="product-item offer-product" href="{{ url_for('product_page', GameID=product[0]) }}">
@@ -161,29 +155,36 @@
         slides[slideIndex].style.display = "block";
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const carousel = document.querySelector('.special-offer');
-        const prevBtn = document.querySelector('.fa-less-than');
-        const nextBtn = document.querySelector('.fa-greater-than');
-        let slidePosition = 0;
-        const slidesToShow = 4;
-        const products = document.querySelectorAll('.offer-product');
-        const totalSlides = products.length;
-        console.log(totalSlides);
-        function moveToNextSlide() {
-          if (slidePosition > -(totalSlides - slidesToShow)) {
-            slidePosition -= 1;
-            carousel.style.transform = `translateX(${slidePosition * (100 / slidesToShow)}%)`;
-          }
-        }
-        function moveToPrevSlide() {
-          if (slidePosition < 0) {
-            slidePosition += 1;
-            carousel.style.transform = `translateX(${slidePosition * (100 / slidesToShow)}%)`;
-          }
-        }
-        nextBtn.addEventListener('click', moveToNextSlide);
-        prevBtn.addEventListener('click', moveToPrevSlide);
-      });
+    const carousel = document.querySelector('.product-grid.special-offer');
+    const games = document.querySelectorAll('.product-item.offer-product');
+    let isDragStart = false;
 
+    function preventNav(event){
+        event.preventDefault();
+    }
+
+    const dragStart = (e) => {
+        isDragStart = true;
+        prevPageX = e.pageX;
+        prevScrollLeft = carousel.scrollLeft;
+    }
+    const dragging = (e) => {
+        games.forEach((game) => {
+            game.addEventListener("mousedown", preventNav);
+        })
+        if (!isDragStart) return;
+        e.preventDefault();
+        let posDiff = e.pageX - prevPageX;
+        carousel.scrollLeft = prevScrollLeft - posDiff;
+    }
+    const dragStop = () => {
+        isDragStart = false;
+        games.forEach((game) => {
+            game.removeEventListener("click", preventNav);
+        })
+    }
+    setTimeout(dragStop, 100);
+    carousel.addEventListener("mousedown", dragStart);
+    carousel.addEventListener("mousemove", dragging);
+    carousel.addEventListener("mouseup", dragStop);
 </script>
